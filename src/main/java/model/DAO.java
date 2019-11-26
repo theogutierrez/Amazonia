@@ -31,7 +31,7 @@ public class DAO {
     public int numberOfCustomers() throws DAOException {
 		int result = 0;
 
-		String sql = "SELECT *  FROM Commande";
+		String sql = "SELECT *  FROM CATEGORIE";
 		// Syntaxe "try with resources" 
 		// cf. https://stackoverflow.com/questions/22671697/try-try-with-resources-and-connection-statement-and-resultset-closing
 		try (   Connection connection = myDataSource.getConnection(); // Ouvrir une connexion
