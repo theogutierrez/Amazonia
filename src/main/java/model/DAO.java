@@ -31,7 +31,7 @@ public class DAO {
     public int numberOfCustomers() throws DAOException {
 		int result = 0;
 
-		String sql = "SELECT *  FROM CATEGORIE";
+		String sql = "SELECT count(*) as nombre  FROM Categorie ";
 		// Syntaxe "try with resources" 
 		// cf. https://stackoverflow.com/questions/22671697/try-try-with-resources-and-connection-statement-and-resultset-closing
 		try (   Connection connection = myDataSource.getConnection(); // Ouvrir une connexion
@@ -40,7 +40,8 @@ public class DAO {
 		) {
 			if (rs.next()) { // Pas la peine de faire while, il y a 1 seul enregistrement
 				// On récupère le champ NUMBER de l'enregistrement courant
-				result = rs.getInt("Code");
+				result = rs.getInt("nombre");
+                               
 			}
 		} catch (SQLException ex) {
 			Logger.getLogger("DAO").log(Level.SEVERE, null, ex);

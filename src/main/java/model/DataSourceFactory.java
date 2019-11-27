@@ -28,9 +28,9 @@ public class DataSourceFactory {
 		switch (TYPE) {
 			case server: // Derby mode serveur, doit être démarré indépendamment
 				org.apache.derby.jdbc.ClientDataSource ds = new org.apache.derby.jdbc.ClientDataSource();
-				ds.setDatabaseName("amazonia_base");
-				ds.setUser("amazonia_admin");
-				ds.setPassword("amazonia_mdp");
+				ds.setDatabaseName("amazon_database");
+				ds.setUser("amazon_admin");
+				ds.setPassword("amazon_mdp");
 				// The host on which Network Server is running
 				ds.setServerName("localhost");
 				// port on which Network Server is listening

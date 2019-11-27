@@ -1,3 +1,5 @@
+package modele;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,6 +19,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import javax.sql.DataSource;
 import model.DAO;
+import model.DAOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,7 +55,13 @@ public class tests {
                 myConnection.close();		
 		myDAO = null;
     }
-    
+    @Test 
+    public void numero() throws DAOException {
+		// Paramètres : message si erreur, valeur attendue, valeur réelle
+                System.out.print(myDAO.numberOfCustomers());
+		assertEquals(1, myDAO.numberOfCustomers());
+	}
+
     public static DataSource getDataSource() throws SQLException {
 		org.hsqldb.jdbc.JDBCDataSource ds = new org.hsqldb.jdbc.JDBCDataSource();
 		ds.setDatabase("jdbc:hsqldb:mem:testcase;shutdown=true");
