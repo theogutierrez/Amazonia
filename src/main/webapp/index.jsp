@@ -14,32 +14,128 @@
     </head>
     <body>      
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="#"><img src ="images/amazon_logo.jpg" alt= width="80" height="50"></a>
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+              <a class="navbar-brand" href="#"><img src ="images/logo_amazonia.jpg" alt= width="120" height="75"></a>
             </div>
-            <ul class="navbar-nav">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Active</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-              </li>
+            <div class="mx-auto order-0">
+                <form class="form-inline navbar-brand mx-auto" action="/action_page.php">
+                  <input class="form-control input-group-btn" type="text" placeholder="Rechercher">
+                  <button class="btn btn-success" type="submit">Rechercher</button>
+                </form>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="#"><h4>Panier</h4></a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#"><h4>Connexion</h4></a>
+                  </li>
+                </ul>
+            </div>
+        </nav> 
+        <nav class="navbar navbar-expand-sm bg-light navbar-light">
+            <ul class="navbar-nav navbar-brand mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Boissons</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Condiments</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Desserts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Produits Laitiers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pâtes et céréales</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Viandes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Produits secs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Poissons et fruits de mer</a>
+                </li>
             </ul>
-            <ul class="navbar-nav navbar-right">
-              <li class="nav-item">
-                  <a class="nav-link" href="#">Panier</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="#">Connexion</a>
-              </li>
-            </ul>
-        </nav>    
-        <button class="btn btn-primary">Acheter</button>
+        </nav> 
+        <div class="container">        
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Catégorie</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Coca</td>
+                        <td>Boisson</td>
+                        <td>25€</td>
+                        <td>
+                            <select class="form-control" id="sel1">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                            </select>
+                        </td>
+                        <td><button type="button" class="btn btn-info">Ajouter Panier</button></td>
+                    </tr>
+                    <tr>
+                        <td>Coca</td>
+                        <td>Boisson</td>
+                        <td>25€</td>
+                        <td>
+                            <select class="form-control" id="sel1">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                            </select>
+                        </td>
+                        <td><button type="button" class="btn btn-info">Ajouter Panier</button></td>
+                    </tr>
+                    <tr>
+                        <td>Coca</td>
+                        <td>Boisson</td>
+                        <td>25€</td>
+                        <td>
+                            <select class="form-control" id="sel1">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                            </select>
+                        </td>
+                        <td><button type="button" class="btn btn-info">Ajouter Panier</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>       
     </body>
 </html>
