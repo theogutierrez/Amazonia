@@ -51,7 +51,7 @@ public class Creatdatabase implements ServletContextListener {
 
 		DAO dao = new DAO(DataSourceFactory.getDataSource());
                  int code = dao.numberOfCustomers();
-                Logger.getLogger("Amazonia").log(Level.INFO, "Database already exists");
+                Logger.getLogger("Amazonia_database").log(Level.INFO, "Database already exists");
                 result = true;
 		return result; //To change body of generated methods, choose Tools | Templates.
     }
@@ -63,17 +63,17 @@ public class Creatdatabase implements ServletContextListener {
 			}
 		};
 		
-		Logger.getLogger("Amazonia").log(Level.INFO, "Creating databse from SQL script");
+		Logger.getLogger("Amazonia_database").log(Level.INFO, "Creating databse from SQL script");
 		try {
 			Connection connection = DataSourceFactory.getDataSource().getConnection();
-			int result = ij.runScript(connection, this.getClass().getResourceAsStream("database_original.sql"), "UTF-8", System.out, "UTF-8");
+			int result = ij.runScript(connection, this.getClass().getResourceAsStream("database_originale.sql"), "UTF-8", System.out, "UTF-8");
 			if (result == 0) {
-				Logger.getLogger("Amazonia").log(Level.INFO, "Database succesfully created");
+				Logger.getLogger("Amazonia_database").log(Level.INFO, "Database succesfully created");
 			} else {
-				Logger.getLogger("Amazonia").log(Level.SEVERE, "Errors creating database");
+				Logger.getLogger("Amazonia_database").log(Level.SEVERE, "Errors creating database");
 			}
 		} catch (SQLException e) {
-			Logger.getLogger("Amazonia").log(Level.SEVERE, null, e);
+			Logger.getLogger("Amazonia_database").log(Level.SEVERE, null, e);
 		}
 
 	} //To change body of generated methods, choose Tools | Templates.
