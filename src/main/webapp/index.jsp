@@ -29,7 +29,7 @@
                       <a class="nav-link" href="#"><h4>Panier</h4></a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="#"><h4>Connexion</h4></a>
+                      <a class="nav-link" href="connexion.jsp"><h4>Connexion</h4></a>
                   </li>
                 </ul>
             </div>
