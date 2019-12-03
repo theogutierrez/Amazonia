@@ -1,11 +1,14 @@
-package modele;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package modele;
 
+/**
+ *
+ * @author pedago
+ */
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -27,12 +30,8 @@ import static org.junit.Assert.*;
 
 import org.hsqldb.cmdline.SqlFile;
 import org.hsqldb.cmdline.SqlToolError;
-/**
- *
- * @author pedago
- */
-public class tests {
-    private static DataSource myDataSource; // La source de données à utiliser
+public class TestDao {
+     private static DataSource myDataSource; // La source de données à utiliser
     private static Connection myConnection ;	
     private DAO  myDAO;
     
@@ -41,7 +40,7 @@ public class tests {
         myDataSource = getDataSource();
 		myConnection = myDataSource.getConnection();
 		// On initialise la base avec le contenu d'un fichier de test
-		String sqlFilePath = tests.class.getResource("testdata.sql").getFile();
+		String sqlFilePath = TestDao.class.getResource("testdata.sql").getFile();
 		SqlFile sqlFile = new SqlFile(new File(sqlFilePath));
 		sqlFile.setConnection(myConnection);
 		sqlFile.execute();
@@ -59,7 +58,7 @@ public class tests {
     public void numero() throws DAOException {
 		// Paramètres : message si erreur, valeur attendue, valeur réelle
                 System.out.print(myDAO.numberOfCustomers());
-		assertEquals(1, myDAO.numberOfCustomers());
+		assertEquals(8, myDAO.numberOfCustomers());
 	}
 
     public static DataSource getDataSource() throws SQLException {
@@ -70,4 +69,5 @@ public class tests {
 		return ds;
     }
    
+    
 }
