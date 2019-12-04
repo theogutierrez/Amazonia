@@ -66,7 +66,8 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Nome</th>
+                        <th>Nom</th>
+                        <th>Fournisseur</th>
                         <th>Catégorie</th>
                         <th>Prix</th>
                         <th>Quantité</th>
@@ -138,4 +139,7 @@
             </table>
         </div>       
     </body>
+    <ul class="nav justify-content-center">
+            <a href="Admin.jsp"   <button class="btn btn-success" type="submit"><h4>Admin</h4></button></a>
+        </ul>
 </html>

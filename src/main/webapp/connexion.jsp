@@ -41,10 +41,10 @@
                     <a><h2>Connexion</h2></a>
             </ul>
         </nav>
-            
+        <br/>
         <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-3">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2">
         <ul class="nav justify-content-center">
             <div class="mx-auto order-0">
                 <form class="form-inline navbar-brand mx-auto" action="/action_page.php">
@@ -52,6 +52,7 @@
                 </form>
             </div>
         </ul>
+            <br/>
         <ul class="nav justify-content-center">
             <div class="mx-auto order-0 ">
                 <form class="form-inline navbar-brand mx-auto" action="/action_page.php">
@@ -60,13 +61,15 @@
             </div>
         </ul>
         </div>
-        <div class="col-sm-3"><input class="form-control input-group-btn" type="text" placeholder="Login">
+        <br/>
+        <div class="col-sm-2"><input class="form-control input-group-btn" type="text" placeholder="Login">
+        <br/>
         <input class="form-control input-group-btn" type="text" placeholder="MDP"></div>
         </div> 
-            
+        <div class="col-sm-4"></div>
         
-        
+        <br />
         <ul class="nav justify-content-center">
-            <button class="btn btn-success" type="submit"><h4>Connexion</h4></button>
+            <a href="Admin.jsp"   <button class="btn btn-success" type="submit"><h4>Connexion</h4></button></a>
         </ul>
 </html>
