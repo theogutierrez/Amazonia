@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Accueil</title>
+        <title>Profil</title>
         <link rel="stylesheet" href="bootstrap-4.3.1/css/bootstrap.min.css">
     </head>
     <body>      
@@ -41,6 +41,7 @@
                 </li>
             </ul>
         </nav> 
+        <br/>
         <div class="container">   
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
@@ -112,7 +113,9 @@
                 <input type="text" value="test" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
             <br/>
-            <button type="button" class="btn btn-success center">Valider</button>
+            <div class="nav justify-content-center">
+                <button type="button" class="btn btn-success btn-lg">Valider</button>
+            </div>
         </div>  
         <footer class="page-footer font-small light">
             <div class="container text-center">
