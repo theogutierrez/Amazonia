@@ -66,8 +66,8 @@ public class Creatdatabase implements ServletContextListener {
 		Logger.getLogger("Amazonia_database").log(Level.INFO, "Creating databse from SQL script");
 		try {
 			Connection connection = DataSourceFactory.getDataSource().getConnection();
-			int result = ij.runScript(connection, this.getClass().getResourceAsStream("database_originale.sql"), "UTF-8", System.out, "UTF-8");
-			if (result == 0) {
+			int schema = ij.runScript(connection, this.getClass().getResourceAsStream("database_originale.sql"), "UTF-8", System.out, "UTF-8");
+			if (schema == 0) {
 				Logger.getLogger("Amazonia_database").log(Level.INFO, "Database succesfully created");
 			} else {
 				Logger.getLogger("Amazonia_database").log(Level.SEVERE, "Errors creating database");
