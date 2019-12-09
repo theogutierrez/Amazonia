@@ -47,7 +47,7 @@ public class servletessai extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet servletessai at " + request.getContextPath() + "</h1>");
             DAO dao = new DAO(DataSourceFactory.getDataSource());
-            int a=dao.numberOfCustomers();
+            int a=dao.numberOfCategorie();
             out.println("<h1>Hey"+ a+"</h1>");
             out.println("</body>");
             out.println("</html>");

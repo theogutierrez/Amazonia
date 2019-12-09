@@ -50,7 +50,7 @@ public class Creatdatabase implements ServletContextListener {
         boolean result = false;
 
 		DAO dao = new DAO(DataSourceFactory.getDataSource());
-                 int code = dao.numberOfCustomers();
+                 int code = dao.numberOfCategorie();
                 Logger.getLogger("Amazonia_database").log(Level.INFO, "Database already exists");
                 result = true;
 		return result; //To change body of generated methods, choose Tools | Templates.
