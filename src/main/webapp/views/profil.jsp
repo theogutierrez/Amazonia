@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Profil</title>
         <link rel="stylesheet" href="bootstrap-4.3.1/css/bootstrap.min.css">
+        <script src="https://kit.fontawesome.com/47131369cd.js" crossorigin="anonymous"></script>
     </head>
     <body>      
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
@@ -26,10 +27,10 @@
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                      <a class="nav-link" href="#"><h4>Panier</h4></a>
+                      <a class="nav-link" href="panier.jsp"><h4>Panier <i class="fas fa-shopping-cart"></i></h4></a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="#"><h4>Connexion</h4></a>
+                      <a class="nav-link" href="connexion.jsp"><h4>Connexion <i class="fas fa-sign-in-alt"></i></h4></a>
                   </li>
                 </ul>
             </div>
