@@ -22,7 +22,7 @@ import model.DataSourceFactory;
  *
  * @author theogutierrez
  */
-@WebServlet(name = "indexController", urlPatterns = {"/indexController"})
+@WebServlet(name = "Amazonia", urlPatterns = {"/Amazonia"})
 public class IndexController extends HttpServlet {
 
     /**
