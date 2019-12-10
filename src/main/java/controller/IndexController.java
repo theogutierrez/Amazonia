@@ -6,6 +6,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.DAO;
+import model.DataSourceFactory;
 
 /**
  *
@@ -33,6 +37,8 @@ public class IndexController extends HttpServlet {
         throws ServletException, IOException {
         // Quelle action a appelé cette servlet ?
         String action = request.getParameter("action");
+        String categorie = request.getParameter("categorie");
+        String nom = request.getParameter("nom");
         if (null != action) {
             switch (action) {
                 case "login":
@@ -57,6 +63,45 @@ public class IndexController extends HttpServlet {
             jspView = "views/index.jsp";
         }
         // On va vers la page choisie
+        try {
+			DAO dao = new DAO(DataSourceFactory.getDataSource());
+						
+			switch (action) {
+                                case "" : 
+                                    request.setAttribute("codes", dao.produit());
+                                    break;
+				case "boissons": 
+					
+					request.setAttribute("codes", dao.produitparcategorie("Boissons"));								
+					break;
+				case "condiments": 
+					request.setAttribute("codes", dao.produitparcategorie("Condiments"));
+					break;
+                                case "desserts": 
+					request.setAttribute("codes", dao.produitparcategorie("Desserts"));
+					break;
+                                case "produits laitiers": 
+					request.setAttribute("codes", dao.produitparcategorie("Produits laitiers"));
+					break;
+                                
+                                case "pates et cereale": 
+					request.setAttribute("codes", dao.produitparcategorie("Pâtes et céréales"));
+					break;
+                                case "viandes": 
+					request.setAttribute("codes", dao.produitparcategorie("Viandes"));
+					break;
+                                case "produits secs": 
+					request.setAttribute("codes", dao.produitparcategorie("produits secs"));
+					break;
+                                
+                                case "poissons et fruit de mer": 
+					request.setAttribute("codes", dao.produitparcategorie("poissons et fruit de mer"));
+					break;
+			}
+		} catch (Exception ex) {
+			Logger.getLogger("amazon").log(Level.SEVERE, "Action en erreur", ex);
+			request.setAttribute("message", ex.getMessage());
+		}
         request.getRequestDispatcher(jspView).forward(request, response);
 
     }

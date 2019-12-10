@@ -75,10 +75,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Coca</td>
+                <c:forEach var="record" items="${codes}">
+                         <tr>
+                        <td>${record.nom}</td>
                         <td>Boisson</td>
-                        <td>25€</td>
+                        <td>${record.prix_unitaire}</td>
                         <td>
                             <select class="form-control" id="sel1">
                                     <option>1</option>
@@ -95,46 +96,11 @@
                         </td>
                         <td><button type="button" class="btn btn-info">Ajouter Panier</button></td>
                     </tr>
-                    <tr>
-                        <td>Coca</td>
-                        <td>Boisson</td>
-                        <td>25€</td>
-                        <td>
-                            <select class="form-control" id="sel1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
-                                    <option>10</option>
-                            </select>
-                        </td>
-                        <td><button type="button" class="btn btn-info">Ajouter Panier</button></td>
-                    </tr>
-                    <tr>
-                        <td>Coca</td>
-                        <td>Boisson</td>
-                        <td>25€</td>
-                        <td>
-                            <select class="form-control" id="sel1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
-                                    <option>10</option>
-                            </select>
-                        </td>
-                        <td><button type="button" class="btn btn-info">Ajouter Panier</button></td>
-                    </tr>
+                
+                
+                </c:forEach>
+                   
+                 
                 </tbody>
             </table>
         </div>  
