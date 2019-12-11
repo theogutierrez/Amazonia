@@ -41,7 +41,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12 text-center">
-                <img src ="images/404.jpg" class="img-fluid img-rounded" alt="Responsive image">
+                <img src ="images/404.jpg" class="img-rounded" alt="Responsive image">
             </div>     
             <div class ="col-lg-12 text-center text">
                 <p>La page que vous avez recherché est introuvable</p>
