@@ -56,6 +56,7 @@ public class DAO {
 
 		return result;
 	}
+    
     public List<Produit> produitparcategorie(String libelle) throws SQLException {
 		List<Produit> result = new LinkedList<>();
 
@@ -63,6 +64,31 @@ public class DAO {
 		try (Connection connection = myDataSource.getConnection();
 		     PreparedStatement stmt = connection.prepareStatement(sql)) {
 			stmt.setString(1, libelle);
+			try (ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					int id = rs.getInt("REFERENCE");
+					String name = rs.getString("Nom");
+					int fourn = rs.getInt("FOURNISSEUR");
+                                        int disp=rs.getInt("INDISPONIBLE");
+                                        int nx=rs.getInt("NIVEAU_DE_REAPPRO");
+                                        float pxuni=rs.getFloat("PRIX_UNITAIRE");
+                                        int unite_co=rs.getInt("UNITES_COMMANDEES");
+                                        String quant=rs.getString("QUANTITE_PAR_UNITE");
+					Produit c = new Produit(id,name,fourn,disp,nx,pxuni,unite_co,quant);
+					result.add(c);
+				}
+			}
+		}
+
+		return result ;
+	}
+    public List<Produit> produit() throws SQLException {
+		List<Produit> result = new LinkedList<>();
+
+		String sql = "Select * from  PRODUIT ";
+		try (Connection connection = myDataSource.getConnection();
+		     PreparedStatement stmt = connection.prepareStatement(sql)) {
+			
 			try (ResultSet rs = stmt.executeQuery()) {
 				while (rs.next()) {
 					int id = rs.getInt("REFERENCE");
