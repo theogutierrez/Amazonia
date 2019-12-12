@@ -19,8 +19,8 @@ public class Produit {
     private float prix_unitaire;
     private int prix_uniteco;
     private int niveau;
-    
-    public Produit(int prodId, String name, int fourni,int dispo,int nx,float pxuni,int pxinuec,String quant){
+    private String label;
+    public Produit(int prodId, String name, int fourni,int dispo,int nx,float pxuni,int pxinuec,String quant,String l){
         this.fournisseur=fourni;
         this.indisponible=dispo;
         this.name=name;
@@ -29,6 +29,41 @@ public class Produit {
         this.prix_uniteco=pxinuec;
         this.produit_id=prodId;
         this.quantite=quant;
+        this.label=l;
     }
+    
+    
+    public int affId(){
+        return this.produit_id;
+    }
+    
+     public int affFour(){
+        return this.fournisseur;
+    }
+     
+     public int affDispo(){
+        return this.indisponible;
+    }
+     public int affNx(){
+        return this.niveau;
+    }
+     
+     public String affnom(){
+        return this.name;
+    }
+      public int affPxu(){
+        return this.prix_uniteco;
+    }
+     public String affQt(){
+        return this.quantite;
+    }
+     public String afflib(){
+        return this.label;
+    }
+    public float Pxuni(){
+        return this.prix_unitaire;
+    }
+     
+         
     
 }

@@ -74,7 +74,8 @@ public class DAO {
                                         float pxuni=rs.getFloat("PRIX_UNITAIRE");
                                         int unite_co=rs.getInt("UNITES_COMMANDEES");
                                         String quant=rs.getString("QUANTITE_PAR_UNITE");
-					Produit c = new Produit(id,name,fourn,disp,nx,pxuni,unite_co,quant);
+                                        String libe=rs.getString("LIBELLE");
+					Produit c = new Produit(id,name,fourn,disp,nx,pxuni,unite_co,quant,libe);
 					result.add(c);
 				}
 			}
@@ -85,7 +86,7 @@ public class DAO {
     public List<Produit> produit() throws SQLException {
 		List<Produit> result = new LinkedList<>();
 
-		String sql = "Select * from  PRODUIT ";
+		String sql = "Select * from CATEGORIE INNER Join PRODUIT on CATEGORIE.code = PRODUIT.CATEGORIE ";
 		try (Connection connection = myDataSource.getConnection();
 		     PreparedStatement stmt = connection.prepareStatement(sql)) {
 			
@@ -99,7 +100,8 @@ public class DAO {
                                         float pxuni=rs.getFloat("PRIX_UNITAIRE");
                                         int unite_co=rs.getInt("UNITES_COMMANDEES");
                                         String quant=rs.getString("QUANTITE_PAR_UNITE");
-					Produit c = new Produit(id,name,fourn,disp,nx,pxuni,unite_co,quant);
+                                        String libe=rs.getString("LIBELLE");
+					Produit c = new Produit(id,name,fourn,disp,nx,pxuni,unite_co,quant,libe);
 					result.add(c);
 				}
 			}

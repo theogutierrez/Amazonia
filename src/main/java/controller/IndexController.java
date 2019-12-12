@@ -66,7 +66,7 @@ public class IndexController extends HttpServlet {
         try {
 			DAO dao = new DAO(DataSourceFactory.getDataSource());
 						
-			switch (action) {
+			switch (categorie) {
                                 case "" : 
                                     request.setAttribute("codes", dao.produit());
                                     break;

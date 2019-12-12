@@ -12,7 +12,50 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Accueil</title>
         <link rel="stylesheet" href="bootstrap-4.3.1/css/bootstrap.min.css">
+        <script	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
         <script src="https://kit.fontawesome.com/47131369cd.js" crossorigin="anonymous"></script>
+        
+         <script>
+            $(document).ready(// Exécuté à la fin du chargement de la page
+                    function () {
+                        // On montre la liste des codes
+                        showCodes();
+                    }
+            );
+
+            function showCodes() {
+                // On fait un appel AJAX pour chercher les codes
+                $.ajax({
+                    url: "allProduit",
+                    dataType: "json",
+                    error: showError,
+                    success: // La fonction qui traite les résultats
+                            function (result) {
+                                
+                                var template = $('#codesTemplate').html();
+                                // On combine le template avec le résultat de la requête
+                                var processedTemplate = Mustache.to_html(template, result);
+                                // On affiche la liste des options dans le select
+                                $('#codes').html(processedTemplate);
+    
+                                }
+                                
+                               
+                                
+
+                });                              
+                                
+            }
+               
+                    
+            // Fonction qui traite les erreurs de la requête
+            function showError(xhr, status, message) {
+                alert(xhr.responseText);
+            }
+
+        </script>
+        
     </head>
     <body>  
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
@@ -75,34 +118,18 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                <c:forEach var="record" items="${codes}">
-                         <tr>
-                        <td>${record.nom}</td>
-                        <td>Boisson</td>
-                        <td>${record.prix_unitaire}</td>
-                        <td>
-                            <select class="form-control" id="sel1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
-                                    <option>10</option>
-                            </select>
-                        </td>
-                        <td><button type="button" class="btn btn-info">Ajouter Panier</button></td>
-                    </tr>
+                <div id="codes">
+               
+                        
+                        
+                        
+                    
                 
                 
-                </c:forEach>
+               
                    
                  
-                </tbody>
+                </div>
             </table>
         </div>  
         <footer class="page-footer font-small light">
@@ -110,6 +137,36 @@
                 <small>Copyright Amazonia</small>
             </div>
         </footer>
+      <script id="codesTemplate" type="text/template">
+            <TABLE>
+            
+            {{! Pour chaque enregistrement }}
+            {{#records}}
+                {{! Une ligne dans la table }}
+                <tr>
+                    <td>{{name}}</td>
+                    <td>{{label}}</td>
+                    <td>{{prix_unitaire}}</td>
+                    <td>
+                        <select class="form-control" id="sell">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                         <option>8</option>
+                          <option>10</option>
+
+                        </select>
+                    </td>
+                    <td><button type="button" class="btn btn-info">Ajouter Panier </button></td>
+                </tr>
+            {{/records}}
+            </TABLE>
+        </script>
     </body>
 
 </html>
