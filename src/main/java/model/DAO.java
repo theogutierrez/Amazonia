@@ -110,6 +110,28 @@ public class DAO {
 		return result ;
 	}
     
+    public void updateProduct(String colonne,String code ,String modif) throws DAOException{
+        String sql = "UPDATE PRODUIT SET "+ colonne+ "=? WHERE NOM=?";
+		try (   Connection connection = myDataSource.getConnection();
+			PreparedStatement stmt = connection.prepareStatement(sql)
+                ) {
+                        // Définir la valeur du paramètre
+                       
+
+                      
+                        stmt.setString(1, modif);
+                        
+                        stmt.setString(2, code);
+                    
+			
+			 stmt.executeUpdate();
+                     
+                         stmt.close();
+		}  catch (SQLException ex) {
+			Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+			throw new DAOException(ex.getMessage());
+		}
+    }
     public ClientEntity findClient(String contact) throws DAOException {
 		ClientEntity result = null;
 

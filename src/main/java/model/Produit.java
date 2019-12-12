@@ -15,14 +15,15 @@ public class Produit {
     private String name;
     private int fournisseur;
     private String quantite;
-    private int indisponible;
+    private boolean indisponible;
     private float prix_unitaire;
     private int prix_uniteco;
     private int niveau;
     private String label;
+  
     public Produit(int prodId, String name, int fourni,int dispo,int nx,float pxuni,int pxinuec,String quant,String l){
         this.fournisseur=fourni;
-        this.indisponible=dispo;
+        this.indisponible=dispo==0;
         this.name=name;
         this.niveau=nx;
         this.prix_unitaire=pxuni;
@@ -30,9 +31,10 @@ public class Produit {
         this.produit_id=prodId;
         this.quantite=quant;
         this.label=l;
+        
     }
     
-    
+     
     public int affId(){
         return this.produit_id;
     }
@@ -41,7 +43,7 @@ public class Produit {
         return this.fournisseur;
     }
      
-     public int affDispo(){
+     public boolean affDispo(){
         return this.indisponible;
     }
      public int affNx(){

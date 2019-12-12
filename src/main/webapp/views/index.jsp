@@ -47,6 +47,36 @@
                 });                              
                                 
             }
+            
+             function showCodeParProduit(cat) {
+                // On fait un appel AJAX pour chercher les codes
+                
+                
+                
+                
+                $.ajax({
+                    url: cat,
+                    dataType: "json",
+                    error: showError,
+                    success: // La fonction qui traite les résultats
+                            function (result) {
+                                console.log(result);
+                                var template = $('#codesTemplate').html();
+                                // On combine le template avec le résultat de la requête
+                                var processedTemplate = Mustache.to_html(template, result);
+                                // On affiche la liste des options dans le select
+                                $('#codes').html(processedTemplate);
+    
+                                }
+                                
+                               
+                                
+
+                });                              
+                                
+            }
+            
+            
                
                     
             // Fonction qui traite les erreurs de la requête
@@ -79,31 +109,32 @@
                 </ul>
             </div>
         </nav> 
+        <input type="hidden"  name="categorie" value="Boissons">
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <ul class="navbar-nav navbar-brand mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Boissons</a>
+                    <a class="nav-link"  onclick="showCodeParProduit('boissons')" href="#">Boissons</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Condiments</a>
+                    <a class="nav-link" onclick="showCodeParProduit('condiments')" href="#">Condiments</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Desserts</a>
+                    <a class="nav-link" onclick="showCodeParProduit('desserts')" href="#">Desserts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Produits Laitiers</a>
+                    <a class="nav-link" onclick="showCodeParProduit('lait')" href="#">Produits Laitiers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pâtes et céréales</a>
+                    <a class="nav-link" onclick="showCodeParProduit('pates')" href="#" >Pâtes et céréales</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Viandes</a>
+                    <a class="nav-link" onclick="showCodeParProduit('viandes')" href="#">Viandes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Produits secs</a>
+                    <a class="nav-link" onclick="showCodeParProduit('secs')" href="#">Produits secs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Poissons et fruits de mer</a>
+                    <a class="nav-link" onclick="showCodeParProduit('poissons')" href="#">Poissons et fruits de mer</a>
                 </li>
             </ul>
         </nav> 
@@ -118,7 +149,7 @@
                         <th></th>
                     </tr>
                 </thead>
-                <div id="codes">
+                <tbody id="codes">
                
                         
                         
@@ -129,7 +160,7 @@
                
                    
                  
-                </div>
+                </tbody>
             </table>
         </div>  
         <footer class="page-footer font-small light">
@@ -144,9 +175,10 @@
             {{#records}}
                 {{! Une ligne dans la table }}
                 <tr>
-                    <td>{{name}}</td>
-                    <td>{{label}}</td>
-                    <td>{{prix_unitaire}}</td>
+                    <td> {{name}}</td>
+                    <td> {{label}}</td>
+                     {{#indisponible}}
+                        <td> {{prix_unitaire}}</td>
                     <td>
                         <select class="form-control" id="sell">
                         <option>1</option>
@@ -162,6 +194,21 @@
 
                         </select>
                     </td>
+                        
+                     {{/indisponible}}
+                    
+                    {{^indisponible }}
+                        
+                        <td> Indisponible </td>
+                        <td>
+                        <select class="form-control" id="sell">
+                        
+                        
+
+                        </select>
+                    </td>
+                    {{/indisponible}}
+                    
                     <td><button type="button" class="btn btn-info">Ajouter Panier </button></td>
                 </tr>
             {{/records}}
