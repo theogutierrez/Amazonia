@@ -51,26 +51,44 @@ public class connexionController extends HttpServlet {
         String jspView;
         if (null == userName) { // L'utilisateur n'est pas connecté
             // On choisit la page de login
-            jspView = "views/connexion.jsp";
+            jspView = "/views/connexion.jsp";
+            request.getRequestDispatcher(jspView).forward(request, response);
         } else { // L'utilisateur est connecté
-            // On choisit la page d'affichage
-            jspView = "views/protected/indexLogin.jsp";
+            //cas admin
+            if("admin".equals(userName)) {
+                jspView = "protected/admin";
+            } else {
+                // On choisit la page d'affichage
+                jspView = "/Amazonia";               
+            }
+            response.sendRedirect(jspView);
         }
-        request.getRequestDispatcher(jspView).forward(request, response);
+        
     }
     private void checkLogin(HttpServletRequest request) {
         // Les paramètres transmis dans la requête
         String contact = request.getParameter("login");
         String mdp = request.getParameter("password");
 
+        String login = "admin";
+        String password = "admin";
         try {
             if (dao.mdp(contact,mdp)) {
                 // On a trouvé la combinaison login / password
                 // On stocke l'information dans la session
                 HttpSession session = request.getSession(true); // démarre la session
                 session.setAttribute("userName", contact);
-            } else { // On positionne un message d'erreur pour l'afficher dans la JSP
-                request.setAttribute("errorMessage", "Login/Password incorrect");
+            } else { 
+                // cas d'admin
+                if(login.equals(contact) && mdp.equals(password)) {
+                    // On a trouvé la combinaison login / password
+                    // On stocke l'information dans la session
+                    HttpSession session = request.getSession(true); // démarre la session
+                    session.setAttribute("userName", contact);           
+                // On positionne un message d'erreur pour l'afficher dans la JSP
+                } else {
+                    request.setAttribute("errorMessage", "Login/Password incorrect");
+                } 
             }
         } catch (DAOException ex) {
             Logger.getLogger(connexionController.class.getName()).log(Level.SEVERE, null, ex);

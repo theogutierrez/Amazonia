@@ -32,9 +32,7 @@ public class Produit {
         this.quantite=quant;
         this.label=l;
         
-    }
-    
-     
+    } 
     public int affId(){
         return this.produit_id;
     }

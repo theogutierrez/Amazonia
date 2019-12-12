@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,7 +32,16 @@ public class adminController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String jspView = "../views/protected/admin.jsp";
+                String userName = findUserInSession(request);
+        String jspView;
+        if (!"admin".equals(userName)) { // L'utilisateur n'est pas connecté ou admin
+            // On choisit la page de login
+            jspView = "../connexion";
+
+        } else { // L'utilisateur est connecté et est admin
+            // On choisit la page d'admin
+            jspView = "../views/protected/admin.jsp";
+        }
         request.getRequestDispatcher(jspView).forward(request, response);
     }
 
@@ -73,5 +83,8 @@ public class adminController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    private String findUserInSession(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        return (session == null) ? null : (String) session.getAttribute("userName");
+    }
 }
