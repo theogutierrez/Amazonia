@@ -28,10 +28,10 @@
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                      <a class="nav-link" href="panier.jsp"><h4>Panier <i class="fas fa-shopping-cart"></i></h4></a>
+                      <a class="nav-link" href="<c:url value='/protected/panier'/>"><h4>Panier <i class="fas fa-shopping-cart"></i></h4></a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="connexion.jsp"><h4>Profil <i class="fas fa-user"></i></h4></a>
+                      <a class="nav-link" href="<c:url value='/protected/profil'/>"><h4>Profil <i class="fas fa-user"></i></h4></a>
                   </li>
                 </ul>
             </div>

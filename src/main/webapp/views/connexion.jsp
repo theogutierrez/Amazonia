@@ -39,6 +39,7 @@
         </nav>
         <br/>
         <div class="row">
+        <div class="col-lg-12 text-center" style="color:red">${errorMessage}</div>
         <div class="col-sm-4"></div>
         <div class="col-sm-2">
         <ul class="nav justify-content-center">
@@ -58,14 +59,19 @@
         </ul>
         </div>
         <br/>
-        <div class="col-sm-2"><input class="form-control input-group-btn" type="text">
-        <br/>
-        <input class="form-control input-group-btn" type="text"></div>
+        
+            <div class="col-sm-2">
+                <form action="<c:url value='/connexion'/>" method="post" id ="formConnec">
+                <input class="form-control input-group-btn" type="text" name="login">
+                <br/>
+                <input class="form-control input-group-btn" type="text" name="password">
+                </form>
+            </div>
         </div> 
         <div class="col-sm-4"></div>
         
         <br />
         <ul class="nav justify-content-center">
-            <a href="Admin.jsp"><button class="btn btn-success btn-lg" type="submit">Connexion</button></a>
+            <a href="Admin.jsp"><button class="btn btn-success btn-lg" type="submit" form="formConnec" name="action" value="login">Connexion</button></a>
         </ul>
 </html>

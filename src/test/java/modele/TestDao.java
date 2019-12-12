@@ -81,10 +81,13 @@ public class TestDao {
 	}
     
      @Test 
-    public void bonmdp() throws DAOException, SQLException {
-	
-                
+    public void bonmdp() throws DAOException, SQLException {              
 		assertTrue(myDAO.mdp("Maria Anders", "ALFKI"));
+	}
+    
+     @Test 
+    public void mauvaisMdp() throws DAOException, SQLException {              
+		assertFalse(myDAO.mdp("Maria An", "ALFKI"));
 	}
     
       @Test 

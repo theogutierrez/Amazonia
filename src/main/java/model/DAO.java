@@ -157,7 +157,9 @@ public class DAO {
 					
 					// On crée l'objet "entity"
 					result = code;
-				} // else on n'a pas trouvé, on renverra null
+				} else { // else on n'a pas trouvé, on renverra null
+                                    result = "";
+                                }
 			}
 		}  catch (SQLException ex) {
 			Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
