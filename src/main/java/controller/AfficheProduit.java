@@ -24,8 +24,8 @@ import model.DataSourceFactory;
  *
  * @author pedago
  */
-@WebServlet(name = "Affiche_tout", urlPatterns = {"/allProduit"})
-public class Affiche_tout extends HttpServlet {
+@WebServlet(name = "Affiche_tout", urlPatterns = {"/affProduit"})
+public class AfficheProduit extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +39,24 @@ public class Affiche_tout extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                DAO dao = new DAO(DataSourceFactory.getDataSource());
-
+               String categorie = request.getParameter("categorie");
+               categorie = (categorie == null) ? "" : categorie;
+               String recherche = request.getParameter("recherche");
+               recherche = (recherche == null) ? "" : recherche;
 		Properties resultat = new Properties();
 		try {
-			resultat.put("records", dao.produit());
+                   switch (categorie) {
+                       case "tous":
+                           resultat.put("records", dao.produit());
+                           break;
+                       case "search":
+                           resultat.put("records", dao.affProduit(recherche));
+                           break;
+                       default:
+                           resultat.put("records", dao.produitparcategorie(categorie));
+                           break;
+                   }
+			
 		} catch (SQLException ex) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			resultat.put("records", Collections.EMPTY_LIST);

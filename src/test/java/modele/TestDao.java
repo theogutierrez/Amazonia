@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 import javax.sql.DataSource;
 import model.ClientEntity;
@@ -94,10 +95,22 @@ public class TestDao {
     public void modification() throws DAOException, SQLException {
                 ClientEntity  client =myDAO.findClient("Maria Anders");
                 String adress=client.Adresse;
-                myDAO.updateCustomer("ADRESSE", "Obere Str. 56", "ALFKI");
+                myDAO.updateCustomer("ADRESSE", "Obere Str. 56", "Maria Anders");
                 String adress2=myDAO.findClient("Maria Anders").Adresse;
       
 		assertFalse(adress.equals(adress2));
+                
+	}
+    
+       @Test 
+    public void TestmAffProduit() throws DAOException, SQLException {
+                List<Produit> produit = new LinkedList<>();
+                       produit= myDAO.affProduit("Chai");
+                int taille=produit.size();
+               
+               
+      
+		assertTrue(taille==1);
                 
 	}
     

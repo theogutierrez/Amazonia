@@ -8,6 +8,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Accueil</title>
@@ -20,45 +21,38 @@
             $(document).ready(// Exécuté à la fin du chargement de la page
                     function () {
                         // On montre la liste des codes
-                        showCodes();
+                        affProduit("tous");
                     }
             );
-
-            function showCodes() {
-                // On fait un appel AJAX pour chercher les codes
-                $.ajax({
-                    url: "allProduit",
-                    dataType: "json",
-                    error: showError,
-                    success: // La fonction qui traite les résultats
-                    function (result) {
-                        var template = $('#codesTemplate').html();
-                        // On combine le template avec le résultat de la requête
-                        var processedTemplate = Mustache.to_html(template, result);
-                        // On affiche la liste des options dans le select
-                        $('#codes').html(processedTemplate);
-                    }                              
-                });                                                             
-            }
             
-            function showCodeParProduit(cat) {
-                // On fait un appel AJAX pour chercher les codes        
+            function affProduit(cat) {
+                // On fait un appel AJAX pour chercher les codes
+               
                 $.ajax({
-                    url: cat+"?categorie=test",
+                    url: "affProduit",
                     dataType: "json",
+                    type : 'GET',
+                    contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+                    data:"categorie="+cat+"&recherche="+$("#search").val(),
                     error: showError,
                     success: // La fonction qui traite les résultats
-                    function (result) {
-                        console.log(result);
-                        var template = $('#codesTemplate').html();
-                        // On combine le template avec le résultat de la requête
-                        var processedTemplate = Mustache.to_html(template, result);
-                        // On affiche la liste des options dans le select
-                        $('#codes').html(processedTemplate);    
-                    }
-                });                                                        
+                            function (result) {
+                                
+                                var template = $('#codesTemplate').html();
+                                // On combine le template avec le résultat de la requête
+                                var processedTemplate = Mustache.to_html(template, result);
+                                // On affiche la liste des options dans le select
+                                $('#codes').html(processedTemplate);
+    
+                                }
+                                
+                               
+                                
+
+                });                              
+                                
             }
-                          
+                    
             // Fonction qui traite les erreurs de la requête
             function showError(xhr, status, message) {
                 alert(xhr.responseText);
@@ -69,12 +63,12 @@
     <body>  
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-              <a class="navbar-brand" href="<c:url value='/'/>"><img src ="images/logo_amazonia.png" alt= width="120" height="75"></a>
+              <a class="navbar-brand" onclick="affProduit('tous')"><img src ="images/logo_amazonia.png" alt= width="120" height="75"></a>
             </div>
             <div class="mx-auto order-0">
-                <form class="form-inline navbar-brand mx-auto" action="/action_page.php">
-                  <input class="form-control input-group-btn" type="text" placeholder="Rechercher">
-                  <button class="btn btn-success" type="submit">Rechercher</button>
+                <form class="form-inline navbar-brand mx-auto" >
+                  <input class="form-control input-group-btn" id="search" type="text" placeholder="Rechercher">
+                  <button class="btn btn-success"  id="recherche" onclick="affProduit('search')" type="button">Rechercher</button>
                 </form>
             </div>
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
@@ -88,32 +82,33 @@
                 </ul>
             </div>
         </nav> 
-        <input type="hidden"  name="categorie" value="Boissons">
+        
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <ul class="navbar-nav navbar-brand mx-auto">
+                
                 <li class="nav-item">
-                    <a class="nav-link"  onclick="showCodeParProduit('boissons')" href="#">Boissons</a>
+                    <a class="nav-link"  onclick="affProduit('Boissons')" href="#">Boissons</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" onclick="showCodeParProduit('condiments')" href="#">Condiments</a>
+                    <a class="nav-link" onclick="affProduit('Condiments')" href="#">Condiments</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" onclick="showCodeParProduit('desserts')" href="#">Desserts</a>
+                    <a class="nav-link" onclick="affProduit('Desserts')" href="#">Desserts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" onclick="showCodeParProduit('lait')" href="#">Produits Laitiers</a>
+                    <a class="nav-link" onclick="affProduit('Produit laitiers')" href="#">Produits Laitiers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" onclick="showCodeParProduit('pates')" href="#" >Pâtes et céréales</a>
+                    <a class="nav-link" onclick="affProduit('Pâtes et céréales')" href="#" >Pâtes et céréales</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" onclick="showCodeParProduit('viandes')" href="#">Viandes</a>
+                    <a class="nav-link" onclick="affProduit('Viandes')" href="#">Viandes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" onclick="showCodeParProduit('secs')" href="#">Produits secs</a>
+                    <a class="nav-link" onclick="affProduit('Produit secs')" href="#">Produits secs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" onclick="showCodeParProduit('poissons')" href="#">Poissons et fruits de mer</a>
+                    <a class="nav-link" onclick="affProduit('Poissons et fruits de mer')" href="#">Poissons et fruits de mer</a>
                 </li>
             </ul>
         </nav> 

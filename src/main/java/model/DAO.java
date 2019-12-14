@@ -110,16 +110,16 @@ public class DAO {
 		return result ;
 	}
     
-    public Produit affProduit(String name) throws SQLException{
-        Produit resultat = null;
-        String sql = "Select * from CATEGORIE INNER Join PRODUIT on CATEGORIE.code = PRODUIT.CATEGORIE where PRODUIT.NAME = ?";
+    public List<Produit> affProduit(String name) throws SQLException{
+        List<Produit> resultat = new LinkedList<>();
+        String sql = "Select * from CATEGORIE INNER Join PRODUIT on CATEGORIE.code = PRODUIT.CATEGORIE where PRODUIT.NOM = ?";
 		try (Connection connection = myDataSource.getConnection();
 		     PreparedStatement stmt = connection.prepareStatement(sql)) {
                         stmt.setString(1, name);
 			try (ResultSet rs = stmt.executeQuery()) {
 				if (rs.next()) {
 					int id = rs.getInt("REFERENCE");
-					String nom = rs.getString("Nom");
+					String nom = rs.getString("NOM");
 					int fourn = rs.getInt("FOURNISSEUR");
                                         int disp=rs.getInt("INDISPONIBLE");
                                         int nx=rs.getInt("NIVEAU_DE_REAPPRO");
@@ -127,7 +127,7 @@ public class DAO {
                                         int unite_co=rs.getInt("UNITES_COMMANDEES");
                                         String quant=rs.getString("QUANTITE_PAR_UNITE");
                                         String libe=rs.getString("LIBELLE");
-					 resultat= new  Produit(id,name,fourn,disp,nx,pxuni,unite_co,quant,libe);
+					 resultat.add(new  Produit(id,name,fourn,disp,nx,pxuni,unite_co,quant,libe));
 					
 				}
                                 
@@ -258,11 +258,11 @@ public class DAO {
 		return result.equals(mdp);
 	}
     
-    public void updateCustomer(String colonne ,String  modif,String  code) throws DAOException {
+    public void updateCustomer(String colonne ,String  modif,String  contact) throws DAOException {
 
 		// Une requête SQL paramétrée
 
-                String sql = "UPDATE CLIENT SET "+ colonne+ "=? WHERE CODE=?";
+                String sql = "UPDATE CLIENT SET "+ colonne+ "=? WHERE CONTACT=?";
 		try (   Connection connection = myDataSource.getConnection();
 			PreparedStatement stmt = connection.prepareStatement(sql)
                 ) {
@@ -272,7 +272,7 @@ public class DAO {
                       
                         stmt.setString(1, modif);
                         
-                        stmt.setString(2, code);
+                        stmt.setString(2, contact);
                     
 			
 			 stmt.executeUpdate();
