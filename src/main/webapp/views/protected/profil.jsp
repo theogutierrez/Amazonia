@@ -17,7 +17,7 @@
     <body>      
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-              <a class="navbar-brand" href="#"><img src ="../images/logo_amazonia.png" alt= width="120" height="75"></a>
+              <a class="navbar-brand" href="<c:url value='/'/>"><img src ="../images/logo_amazonia.png" alt= width="120" height="75"></a>
             </div>
             <div class="mx-auto order-0">
                 <form class="form-inline navbar-brand mx-auto" action="/action_page.php">
@@ -28,10 +28,10 @@
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                      <a class="nav-link" href="panier.jsp"><h4>Panier <i class="fas fa-shopping-cart"></i></h4></a>
+                      <a class="nav-link" href="<c:url value='/protected/panier'/>"><h4>Panier <i class="fas fa-shopping-cart"></i></h4></a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="connexion.jsp"><h4>Connexion <i class="fas fa-sign-in-alt"></i></h4></a>
+                      <a class="nav-link" href="<c:url value='/protected/profil'/>"><h4>Profil <i class="fas fa-user"></i></h4></a>
                   </li>
                 </ul>
             </div>

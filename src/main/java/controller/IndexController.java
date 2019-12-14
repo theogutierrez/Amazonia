@@ -60,7 +60,7 @@ public class IndexController extends HttpServlet {
 
         } else { // L'utilisateur est connecté
             // On choisit la page d'affichage
-            jspView = "views/index.jsp";
+            jspView = "views/protected/indexLogin.jsp";
         }
         // On va vers la page choisie
         try {

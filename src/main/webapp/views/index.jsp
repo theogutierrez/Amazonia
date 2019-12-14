@@ -16,7 +16,7 @@
          <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
         <script src="https://kit.fontawesome.com/47131369cd.js" crossorigin="anonymous"></script>
         
-         <script>
+        <script>
             $(document).ready(// Exécuté à la fin du chargement de la page
                     function () {
                         // On montre la liste des codes
@@ -31,66 +31,45 @@
                     dataType: "json",
                     error: showError,
                     success: // La fonction qui traite les résultats
-                            function (result) {
-                                
-                                var template = $('#codesTemplate').html();
-                                // On combine le template avec le résultat de la requête
-                                var processedTemplate = Mustache.to_html(template, result);
-                                // On affiche la liste des options dans le select
-                                $('#codes').html(processedTemplate);
-    
-                                }
-                                
-                               
-                                
-
-                });                              
-                                
+                    function (result) {
+                        var template = $('#codesTemplate').html();
+                        // On combine le template avec le résultat de la requête
+                        var processedTemplate = Mustache.to_html(template, result);
+                        // On affiche la liste des options dans le select
+                        $('#codes').html(processedTemplate);
+                    }                              
+                });                                                             
             }
             
-             function showCodeParProduit(cat) {
-                // On fait un appel AJAX pour chercher les codes
-                
-                
-                
-                
+            function showCodeParProduit(cat) {
+                // On fait un appel AJAX pour chercher les codes        
                 $.ajax({
-                    url: cat,
+                    url: cat+"?categorie=test",
                     dataType: "json",
                     error: showError,
                     success: // La fonction qui traite les résultats
-                            function (result) {
-                                console.log(result);
-                                var template = $('#codesTemplate').html();
-                                // On combine le template avec le résultat de la requête
-                                var processedTemplate = Mustache.to_html(template, result);
-                                // On affiche la liste des options dans le select
-                                $('#codes').html(processedTemplate);
-    
-                                }
-                                
-                               
-                                
-
-                });                              
-                                
+                    function (result) {
+                        console.log(result);
+                        var template = $('#codesTemplate').html();
+                        // On combine le template avec le résultat de la requête
+                        var processedTemplate = Mustache.to_html(template, result);
+                        // On affiche la liste des options dans le select
+                        $('#codes').html(processedTemplate);    
+                    }
+                });                                                        
             }
-            
-            
-               
-                    
+                          
             // Fonction qui traite les erreurs de la requête
             function showError(xhr, status, message) {
                 alert(xhr.responseText);
             }
-
         </script>
         
     </head>
     <body>  
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-              <a class="navbar-brand" href="index.jsp"><img src ="images/logo_amazonia.png" alt= width="120" height="75"></a>
+              <a class="navbar-brand" href="<c:url value='/'/>"><img src ="images/logo_amazonia.png" alt= width="120" height="75"></a>
             </div>
             <div class="mx-auto order-0">
                 <form class="form-inline navbar-brand mx-auto" action="/action_page.php">

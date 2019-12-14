@@ -43,14 +43,8 @@ public class Aff_Boisson extends HttpServlet {
             
                                                         
 		Properties resultat = new Properties();
-		try {
-                        
-                            resultat.put("records", dao.produitparcategorie("Boissons"));	
-                        						
-					
-				
-			
-			
+		try {        
+                    resultat.put("records", dao.produitparcategorie("Boissons"));	
 		} catch (SQLException ex) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			resultat.put("records", Collections.EMPTY_LIST);
