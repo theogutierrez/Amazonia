@@ -110,6 +110,71 @@ public class DAO {
 		return result ;
 	}
     
+    public Produit affProduit(String name) throws SQLException{
+        Produit resultat = null;
+        String sql = "Select * from CATEGORIE INNER Join PRODUIT on CATEGORIE.code = PRODUIT.CATEGORIE where PRODUIT.NAME = ?";
+		try (Connection connection = myDataSource.getConnection();
+		     PreparedStatement stmt = connection.prepareStatement(sql)) {
+                        stmt.setString(1, name);
+			try (ResultSet rs = stmt.executeQuery()) {
+				if (rs.next()) {
+					int id = rs.getInt("REFERENCE");
+					String nom = rs.getString("Nom");
+					int fourn = rs.getInt("FOURNISSEUR");
+                                        int disp=rs.getInt("INDISPONIBLE");
+                                        int nx=rs.getInt("NIVEAU_DE_REAPPRO");
+                                        float pxuni=rs.getFloat("PRIX_UNITAIRE");
+                                        int unite_co=rs.getInt("UNITES_COMMANDEES");
+                                        String quant=rs.getString("QUANTITE_PAR_UNITE");
+                                        String libe=rs.getString("LIBELLE");
+					 resultat= new  Produit(id,name,fourn,disp,nx,pxuni,unite_co,quant,libe);
+					
+				}
+                                
+			}
+                        catch (SQLException ex) {
+			Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+			throw new SQLException(ex.getMessage());}
+                        
+		}   
+                return resultat;
+    }
+    
+    public int addProduct( String name, int fourni,int dispo,int nx,float pxuni,int pxinuec,String quant,int cate,int unitstock) throws SQLException {
+		int result = 0;
+		String sql = "INSERT PRODUIT (Nom,Fournisseur,Categorie,Quantite_par_unite,Prix_unitaire,Unites_en_stock,Unites_commandees,Niveau_de_reappro,Indisponible) VALUES (?,?,?,?,?,?,?,?,?)";
+		try (Connection connection = myDataSource.getConnection(); 
+		     PreparedStatement stmt = connection.prepareStatement(sql)) {
+                    
+			stmt.setString(1, name);
+                        stmt.setInt(2, fourni);
+                        stmt.setInt(3, cate);
+                        stmt.setString(4, quant);
+                        stmt.setFloat(5, pxuni);
+                        stmt.setInt(6, unitstock);
+                        stmt.setInt(7, pxinuec);
+                        stmt.setInt(8, nx);
+                        stmt.setInt(9, dispo);
+			result = stmt.executeUpdate();
+		}
+                
+		return result;
+	}
+    
+    public int delProduct( String name) throws SQLException {
+		int result = 0;
+		String sql = "DELETE FROM PRODUIT WHERE NAME = ?";
+		try (Connection connection = myDataSource.getConnection(); 
+		     PreparedStatement stmt = connection.prepareStatement(sql)) {
+                    
+			stmt.setString(1, name);
+                        
+			result = stmt.executeUpdate();
+		}
+                
+		return result;
+	}
+    
     public void updateProduct(String colonne,String code ,String modif) throws DAOException{
         String sql = "UPDATE PRODUIT SET "+ colonne+ "=? WHERE NOM=?";
 		try (   Connection connection = myDataSource.getConnection();
@@ -231,7 +296,7 @@ public class DAO {
                         // On démarre la transaction
 			myConnection.setAutoCommit(false);
                         
-                        System.out.println("Ca commence");
+                    
                         System.out.println(customer.getcode());
                         invoiceStatement.setString(1, customer.getcode());
                         invoiceStatement.setString(2, this.aujourdhui() );
@@ -318,7 +383,7 @@ public class DAO {
     
     
     public ArrayList<Integer> findCommandeForparametre(String colonne ,String p ) throws SQLException {
-		ArrayList<Integer> result = new ArrayList<Integer>();
+		ArrayList<Integer> result = new ArrayList<>();
 
 		String sql = "SELECT * FROM COMMANDE WHERE"+colonne+"  = ?";
 
