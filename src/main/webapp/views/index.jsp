@@ -40,10 +40,6 @@
                                 $('#codes').html(processedTemplate);
     
                                 }
-                                
-                               
-                                
-
                 });                              
                                 
             }
