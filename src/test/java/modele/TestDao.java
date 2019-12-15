@@ -134,8 +134,6 @@ public class TestDao {
 		// Le client a maintenant une facture de plus
 		assertEquals(before + 1, after);		
 	}
-        
-    
  
     public static DataSource getDataSource() throws SQLException {
 		org.hsqldb.jdbc.JDBCDataSource ds = new org.hsqldb.jdbc.JDBCDataSource();

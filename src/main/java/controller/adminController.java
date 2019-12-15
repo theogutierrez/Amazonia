@@ -37,11 +37,12 @@ public class adminController extends HttpServlet {
         if (!"admin".equals(userName)) { // L'utilisateur n'est pas connecté ou admin
             // On choisit la page de login
             jspView = "../connexion";
-
+            response.sendRedirect(jspView);
         } else { // L'utilisateur est connecté et est admin
             // On choisit la page d'admin
             jspView = "../views/protected/admin.jsp";
         }
+        
         request.getRequestDispatcher(jspView).forward(request, response);
     }
 
