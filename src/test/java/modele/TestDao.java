@@ -26,6 +26,7 @@ import javax.sql.DataSource;
 import model.ClientEntity;
 import model.DAO;
 import model.DAOException;
+import model.LignePanier;
 import model.Produit;
 import org.junit.After;
 import org.junit.Before;
@@ -91,7 +92,7 @@ public class TestDao {
 		assertFalse(myDAO.mdp("Maria An", "ALFKI"));
 	}
     
-      @Test 
+    @Test 
     public void modification() throws DAOException, SQLException {
                 ClientEntity  client =myDAO.findClient("Maria Anders");
                 String adress=client.Adresse;
@@ -102,16 +103,54 @@ public class TestDao {
                 
 	}
     
-       @Test 
-    public void TestmAffProduit() throws DAOException, SQLException {
-                List<Produit> produit = new LinkedList<>();
-                       produit= myDAO.affProduit("Chai");
-                int taille=produit.size();
+    @Test 
+    public void TestmAffPANIER() throws DAOException, SQLException {
+                myDAO.AddPanier("Chai","ALFKI"  ,"Boissons", 1, (float) 90.00);
+                List<LignePanier> panier = new LinkedList<>();
+                       panier= myDAO.affPanier("ALFKI");
+                int taille=panier.size();
                
                
       
 		assertTrue(taille==1);
                 
+	}
+    @Test 
+    public void TestAddProduit() throws DAOException, SQLException {
+                String name="Coca-Cola";
+                int fourni=1;
+                int dispo=0;
+                int nx=0;
+                float pxuni=(float) 30.00;    
+                int pxinuec=20;
+                String quant="20 BOITES X 10 BOUTEILLE";
+                int cate=1;
+                int unitstock=200;
+                int taille=myDAO.produit().size();
+                myDAO.addProduct(name, fourni, dispo, nx, pxuni, pxinuec, quant, cate, unitstock);
+                
+                assertTrue(myDAO.produit().size()==taille+1);
+	
+	}
+    
+    @Test 
+    public void TestDelProduit() throws DAOException, SQLException {
+                
+                int taille=myDAO.produit().size();
+                myDAO.delProduct("Chai");
+                
+                assertTrue(myDAO.produit().size()==taille-1);
+	
+	}
+    
+     @Test 
+    public void TestAddPanier() throws DAOException, SQLException {
+                
+                int taille=myDAO.produit().size();
+                myDAO.delProduct("Chai");
+                
+                assertTrue(myDAO.produit().size()==taille-1);
+	
 	}
     
     
@@ -134,6 +173,10 @@ public class TestDao {
 		// Le client a maintenant une facture de plus
 		assertEquals(before + 1, after);		
 	}
+        
+        
+        
+    
  
     public static DataSource getDataSource() throws SQLException {
 		org.hsqldb.jdbc.JDBCDataSource ds = new org.hsqldb.jdbc.JDBCDataSource();

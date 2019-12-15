@@ -12,7 +12,71 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Accueil</title>
         <link rel="stylesheet" href="../bootstrap-4.3.1/css/bootstrap.min.css">
+        <script	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
         <script src="https://kit.fontawesome.com/47131369cd.js" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(// Exécuté à la fin du chargement de la page
+                    function () {
+                        // On montre la liste des codes
+                        affProduit("panier");
+                    }
+            );
+            
+            function affProduit(cat) {
+                // On fait un appel AJAX pour chercher les codes
+               
+                $.ajax({
+                    url: "affProduit",
+                    dataType: "json",
+                    type : 'GET',
+                    contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+                    data:"categorie="+cat+"&recherche="+$("#search").val(),
+                    error: showError,
+                    success: // La fonction qui traite les résultats
+                            function (result) {
+                                
+                                var template = $('#codesTemplate').html();
+                                // On combine le template avec le résultat de la requête
+                                var processedTemplate = Mustache.to_html(template, result);
+                                // On affiche la liste des options dans le select
+                                $('#codes').html(processedTemplate);
+    
+                                }
+                                
+                               
+                                
+
+                });                              
+                                
+            }
+            
+             function AddOrdelete(cat,id) {
+                // On fait un appel AJAX pour chercher les codes
+                
+                $.ajax({
+                    url: "AddDelete",
+                    dataType: "json",
+                    data:"AddOrDel="+cat+"&prodname="+$("#nom"+id).html()+"&libel="+$("#libel"+id).html()+"&quant="+$("#quantite"+id+" option:selected").val()+"&prix="+$("#prix"+id).html(),
+                    error: showError,
+                    success: // La fonction qui traite les résultats
+                            function (result) {
+                                    affProduit("panier");
+    
+                                }
+                                
+                               
+                                
+
+                });                            
+                                
+            }
+                    
+            // Fonction qui traite les erreurs de la requête
+            function showError(xhr, status, message) {
+                alert(xhr.responseText);
+            }
+        </script>
     </head>
     <body>      
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
@@ -55,27 +119,8 @@
                         
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td><button type="button" class="btn btn-danger">Supprimer</button></td>
-                        <td>Coca</td>
-                        <td>Boisson</td>
-                        <td>25€</td>
-                        <td>
-                            <select class="form-control" id="sel1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
-                                    <option>10</option>
-                            </select>
-                        </td>
-                    </tr>
+                <tbody id="codes">
+                   
                 </tbody>
             </table>
         </div>  
@@ -84,5 +129,24 @@
                 <small>Copyright Amazonia</small>
             </div>
         </footer>
+        <script id="codesTemplate" type="text/template">
+            <TABLE>
+            
+            {{! Pour chaque enregistrement }}
+            {{#records}}
+                {{! Une ligne dans la table }}
+                <tr>
+                    <td id="nom{{produit_id}}">{{name}}</td>
+                    <td id="libel{{produit_id}}">{{libel}}</td>
+                     
+                    <td id="prix{{produit_id}}">{{prix}}</td>
+                    <td>{{quant}}</td>
+                    <td ><button  type="button" id={{produit_id}} onclick="AddOrdelete('Del',{{produit_id}})" class="btn btn-info">Supprimer</button></td>
+                
+                   
+                </tr>
+            {{/records}}
+            </TABLE>
+        </script>
     </body>
 </html>

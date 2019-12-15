@@ -61,47 +61,12 @@ public class IndexController extends HttpServlet {
         } else { // L'utilisateur est connecté
             // On choisit la page d'affichage
             jspView = "views/protected/indexLogin.jsp";
+            
+            
+            
         }
         // On va vers la page choisie
-        try {
-			DAO dao = new DAO(DataSourceFactory.getDataSource());
-						
-			switch (categorie) {
-                                case "" : 
-                                    request.setAttribute("codes", dao.produit());
-                                    break;
-				case "boissons": 
-					
-					request.setAttribute("codes", dao.produitparcategorie("Boissons"));								
-					break;
-				case "condiments": 
-					request.setAttribute("codes", dao.produitparcategorie("Condiments"));
-					break;
-                                case "desserts": 
-					request.setAttribute("codes", dao.produitparcategorie("Desserts"));
-					break;
-                                case "produits laitiers": 
-					request.setAttribute("codes", dao.produitparcategorie("Produits laitiers"));
-					break;
-                                
-                                case "pates et cereale": 
-					request.setAttribute("codes", dao.produitparcategorie("Pâtes et céréales"));
-					break;
-                                case "viandes": 
-					request.setAttribute("codes", dao.produitparcategorie("Viandes"));
-					break;
-                                case "produits secs": 
-					request.setAttribute("codes", dao.produitparcategorie("produits secs"));
-					break;
-                                
-                                case "poissons et fruit de mer": 
-					request.setAttribute("codes", dao.produitparcategorie("poissons et fruit de mer"));
-					break;
-			}
-		} catch (Exception ex) {
-			Logger.getLogger("amazon").log(Level.SEVERE, "Action en erreur", ex);
-			request.setAttribute("message", ex.getMessage());
-		}
+       
         request.getRequestDispatcher(jspView).forward(request, response);
 
     }
