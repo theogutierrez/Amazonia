@@ -20,8 +20,10 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import javax.sql.DataSource;
 import model.ClientEntity;
 import model.DAO;
@@ -155,26 +157,38 @@ public class TestDao {
     
     
     @Test
-	public void canCreateCommande() throws Exception {
-		// On calcule combien le client a de factures
-		String code = "Maria Anders" ;
-                ClientEntity test=myDAO.findClient(code);
-		int before = myDAO.numberOfInvoicesForCustomer( test.getcode());
-                System.out.println(before);
-		// Un tableau de 3 productID
-		int[] productIds = new int[]{3,1,2};
-		// Un tableau de 3 quantites
-		int[] quantities = new int[]{10, 20, 30};
-		// On exécute la transaction
-                
-                
-		myDAO.createCommande(test, productIds, quantities);
-		int after = myDAO.numberOfInvoicesForCustomer( test.code);
-		// Le client a maintenant une facture de plus
-		assertEquals(before + 1, after);		
-	}
-        
-        
+    public void canCreateCommande() throws Exception {
+        // On calcule combien le client a de factures
+        String code = "Maria Anders" ;
+        ClientEntity test=myDAO.findClient(code);
+        int before = myDAO.numberOfInvoicesForCustomer( test.getcode());
+        System.out.println(before);
+        // Un tableau de 3 productID
+        int[] productIds = new int[]{3,1,2};
+        // Un tableau de 3 quantites
+        int[] quantities = new int[]{10, 20, 30};
+        // On exécute la transaction
+
+
+        myDAO.createCommande(test, productIds, quantities);
+        int after = myDAO.numberOfInvoicesForCustomer( test.code);
+        // Le client a maintenant une facture de plus
+        assertEquals(before + 1, after);		
+    }
+    
+    @Test
+    public void testPriceByCategorie() throws Exception {
+        Map<String, Float> result = new HashMap<>();
+        result = myDAO.priceByCategorie("1900-00-00","2050-00-00");
+        assertEquals(result.size(), 8);
+    }
+ 
+    @Test
+    public void testErrorPriceByCategorie() throws Exception {
+        Map<String, Float> result = new HashMap<>();
+        result = myDAO.priceByCategorie("1994","1996-08-04");
+        assertEquals(result.size(), 0);
+    }
         
     
  

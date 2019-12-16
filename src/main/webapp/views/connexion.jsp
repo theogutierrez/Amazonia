@@ -72,6 +72,6 @@
         
         <br />
         <ul class="nav justify-content-center">
-            <a href="Admin.jsp"><button class="btn btn-success btn-lg" type="submit" form="formConnec" name="action" value="login">Connexion</button></a>
+            <button class="btn btn-success btn-lg" type="submit" form="formConnec" name="action" value="login">Connexion</button>
         </ul>
 </html>

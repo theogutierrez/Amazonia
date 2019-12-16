@@ -49,10 +49,10 @@ public class adminController extends HttpServlet {
             if (null != page) {
                 switch (page) {
                     case "ajouter":
-                        ajouterProduit(request);
+                        if(request.getParameter("nom") != null) ajouterProduit(request);
                         jspView="../views/protected/adminAjouter.jsp";
                         break;
-                    case "modifer":
+                    case "modifier":
                         jspView="../views/protected/adminModifier.jsp";
                         break;
                     case "stat":
@@ -113,7 +113,7 @@ public class adminController extends HttpServlet {
     private void ajouterProduit(HttpServletRequest request) {
         String nom = request.getParameter("nom");
         int categorie = Integer.parseInt(request.getParameter("categorie"));
-        int fournisseur = Integer.parseInt(request.getParameter("founrnisseur"));
+        int fournisseur = Integer.parseInt(request.getParameter("fournisseur"));
         int reapprovisionnement = Integer.parseInt(request.getParameter("reapprovisionnement"));
         String quantite = request.getParameter("quantite");
         float prixU = Float.parseFloat(request.getParameter("prixU"));

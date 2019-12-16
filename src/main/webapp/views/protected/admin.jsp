@@ -14,6 +14,29 @@
         <link rel="stylesheet" href="../bootstrap-4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="../CSS/main.css">
         <script src="https://kit.fontawesome.com/47131369cd.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load("current", {packages:["corechart"]});
+          google.charts.setOnLoadCallback(drawChartCategorie);
+          function drawChartCategorie() {
+            var data = google.visualization.arrayToDataTable([
+              ['Categorie', 'Chiffre d\'affaire'],
+              ['Work',     11],
+              ['Eat',      2],
+              ['Commute',  2],
+              ['Watch TV', 2],
+              ['Sleep',    7]
+            ]);
+
+            var options = {
+              title: 'Chiffre d\'affaire par catégorie',
+              is3D: true,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('grapheCategorie'));
+            chart.draw(data, options);
+          }
+        </script>
     </head>
         <body>      
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
@@ -50,6 +73,29 @@
                     <a class="nav-link" href="<c:url value='/protected/admin?page=modifier'/>">Modifier des produits</a>
                 </li>
             </ul>
-        </nav>      
+        </nav>
+        <div class="container">
+            <div class="row">          
+                <div class="lg-12"> 
+                    <div id="grapheCategorie" class ="text-center"style="width: 900px; height: 500px;"></div>
+                </div>
+            </div>
+            <div class="row">
+                <form>
+                    <div class="col">
+                        <input type="text" class="form-control" value="1900-00-00">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" value="2100-00-00">
+                    </div>
+                </form>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-success btn-lg" form="formCategorie"  name="action" value="Valider">Ajouter</button>              
+                </div> 
+            </div>    
+        </div>        
     </body>
 </html>

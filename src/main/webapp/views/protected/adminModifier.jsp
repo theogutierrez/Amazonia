@@ -41,13 +41,13 @@
             <ul class="navbar-nav navbar-brand mx-auto">
                 
                 <li class="nav-item">
-                    <a class="nav-link"href="#">Statistiques</a>
+                    <a class="nav-link"href="<c:url value='/protected/admin?page=stat'/>">Statistiques</a>
                 </li>                
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Ajouter un produit</a>
+                    <a class="nav-link" href="<c:url value='/protected/admin?page=ajouter'/>">Ajouter un produit</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Modifier des produits</a>
+                    <a class="nav-link" href="<c:url value='/protected/admin?page=modifer'/>">Modifier des produits</a>
                 </li>
             </ul>
         </nav> 

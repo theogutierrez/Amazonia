@@ -41,15 +41,9 @@
                                 // On combine le template avec le résultat de la requête
                                 var processedTemplate = Mustache.to_html(template, result);
                                 // On affiche la liste des options dans le select
-                                $('#codes').html(processedTemplate);
-    
+                                $('#codes').html(processedTemplate);  
                                 }
-                                
-                               
-                                
-
-                });                              
-                                
+                });                                                           
             }
             
              function AddOrdelete(cat,id) {

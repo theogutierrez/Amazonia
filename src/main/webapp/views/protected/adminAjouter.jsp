@@ -41,13 +41,13 @@
             <ul class="navbar-nav navbar-brand mx-auto">
                 
                 <li class="nav-item">
-                    <a class="nav-link"href="#">Statistiques</a>
+                    <a class="nav-link"href="<c:url value='/protected/admin?page=stat'/>">Statistiques</a>
                 </li>                
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Ajouter un produit</a>
+                    <a class="nav-link" href="<c:url value='/protected/admin?page=ajouter'/>">Ajouter un produit</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Modifier des produits</a>
+                    <a class="nav-link" href="<c:url value='/protected/admin?page=modifier'/>">Modifier des produits</a>
                 </li>
             </ul>
         </nav> 
@@ -94,7 +94,7 @@
                 </table>
             </form>
             <div class="nav justify-content-center">
-                <button type="button" class="btn btn-success btn-lg" form="formAjouter">Ajouter</button>
+                <button type="submit" class="btn btn-success btn-lg" form="formAjouter"  name="action" value="ajouter">Ajouter</button>
             </div>
         </div>
     </body>

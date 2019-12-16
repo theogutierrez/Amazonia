@@ -15,6 +15,8 @@ import java.util.List;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sql.DataSource;
@@ -180,7 +182,6 @@ public class DAO {
 		String sql = "INSERT INTO PRODUIT (Nom,Fournisseur,Categorie,Quantite_par_unite,Prix_unitaire,Unites_en_stock,Unites_commandees,Niveau_de_reappro,Indisponible) VALUES (?,?,?,?,?,?,?,?,?)";
 		try (Connection connection = myDataSource.getConnection(); 
 		     PreparedStatement stmt = connection.prepareStatement(sql)) {
-                    
 			stmt.setString(1, name);
                         stmt.setInt(2, fourni);
                         stmt.setInt(3, cate);
@@ -392,12 +393,7 @@ public class DAO {
                         invoiceStatement.setString(8, customer.region);
                         invoiceStatement.setString(9, customer.cp);
                         invoiceStatement.setString(10, customer.pays);
-                        invoiceStatement.setFloat(11, (float)0.00);
-                        
-                        
-                        
-                        
-                        
+                        invoiceStatement.setFloat(11, (float)0.00);   
 			try {
                                 
                                 
@@ -490,5 +486,35 @@ public class DAO {
        return new SimpleDateFormat("yyyy-MM-dd").format(date);
     }
     
-    
+    /**
+     * Méthode pour récupérer les CA par catégorie
+     * @param dateDebut
+     * @param dateFin
+     * @return 
+     * @throws java.sql.SQLException 
+     */
+    public Map<String, Float> priceByCategorie(String dateDebut, String dateFin) throws SQLException {
+        Map<String, Float> result = new HashMap<>();
+        String sql ="SELECT SUM(QUANTITE*PRIX_UNITAIRE) AS TOTAL,LIBELLE\n" +
+                    "FROM PRODUIT\n" +
+                    "INNER JOIN LIGNE ON LIGNE.PRODUIT = PRODUIT.REFERENCE\n" +
+                    "INNER JOIN CATEGORIE ON PRODUIT.CATEGORIE = CATEGORIE.CODE\n" +
+                    "INNER JOIN COMMANDE ON COMMANDE.NUMERO = LIGNE.COMMANDE\n" +
+                    "WHERE COMMANDE.SAISIE_LE BETWEEN ? AND ? \n" +
+                    "GROUP BY CATEGORIE.LIBELLE ORDER BY TOTAL;";
+        try (Connection connection = myDataSource.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1,dateDebut);
+            stmt.setString(2,dateFin);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String libelle = rs.getString("LIBELLE");
+                float total = rs.getFloat("TOTAL");
+                result.put(libelle, total);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+	}
+        return result;      
+    }
 }
