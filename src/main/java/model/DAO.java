@@ -79,6 +79,10 @@ public class DAO {
 					result.add(c);
 				}
 			}
+                        catch (SQLException ex) {
+			Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+			throw new SQLException(ex.getMessage());
+                        }
 		}
 
 		return result ;
@@ -105,6 +109,10 @@ public class DAO {
 					result.add(c);
 				}
 			}
+                        catch (SQLException ex) {
+			Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+			throw new SQLException(ex.getMessage());
+                        }
 		}
 
 		return result ;
@@ -134,15 +142,42 @@ public class DAO {
 			}
                         catch (SQLException ex) {
 			Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
-			throw new SQLException(ex.getMessage());}
+			throw new SQLException(ex.getMessage());
+                        }
                         
 		}   
                 return resultat;
     }
-    
+    public List<LignePanier> affPanier(String client) throws SQLException{
+        List<LignePanier> resultat = new LinkedList<>();
+        String sql = "Select * from Panier where Client = ?";
+		try (Connection connection = myDataSource.getConnection();
+		     PreparedStatement stmt = connection.prepareStatement(sql)) {
+                        stmt.setString(1, client);
+			try (ResultSet rs = stmt.executeQuery()) {
+				if (rs.next()) {
+					int id = rs.getInt("Numero");
+					String produit = rs.getString("Produit");
+                                        String iencli = rs.getString("Client");
+                                        float pxuni=rs.getFloat("Prix");
+                                        int quant=rs.getInt("Quantite");
+                                        String libe=rs.getString("Libelle");
+					 resultat.add(new  LignePanier(produit,iencli,libe,quant,pxuni));
+					
+				}
+                                
+			}
+                        catch (SQLException ex) {
+			Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+			throw new SQLException(ex.getMessage());
+                        }
+                        
+		}   
+                return resultat;
+    }
     public int addProduct( String name, int fourni,int dispo,int nx,float pxuni,int pxinuec,String quant,int cate,int unitstock) throws SQLException {
 		int result = 0;
-		String sql = "INSERT PRODUIT (Nom,Fournisseur,Categorie,Quantite_par_unite,Prix_unitaire,Unites_en_stock,Unites_commandees,Niveau_de_reappro,Indisponible) VALUES (?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO PRODUIT (Nom,Fournisseur,Categorie,Quantite_par_unite,Prix_unitaire,Unites_en_stock,Unites_commandees,Niveau_de_reappro,Indisponible) VALUES (?,?,?,?,?,?,?,?,?)";
 		try (Connection connection = myDataSource.getConnection(); 
 		     PreparedStatement stmt = connection.prepareStatement(sql)) {
                     
@@ -158,12 +193,17 @@ public class DAO {
 			result = stmt.executeUpdate();
 		}
                 
+                catch (SQLException ex) {
+			Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+			throw new SQLException(ex.getMessage());
+                        }
+                
 		return result;
 	}
     
     public int delProduct( String name) throws SQLException {
 		int result = 0;
-		String sql = "DELETE FROM PRODUIT WHERE NAME = ?";
+		String sql = "DELETE FROM PRODUIT WHERE NOM = ?";
 		try (Connection connection = myDataSource.getConnection(); 
 		     PreparedStatement stmt = connection.prepareStatement(sql)) {
                     
@@ -171,7 +211,51 @@ public class DAO {
                         
 			result = stmt.executeUpdate();
 		}
+                catch (SQLException ex) {
+			Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+			throw new SQLException(ex.getMessage());
+                        }
+		return result;
+	}
+    
+    
+    
+     public int AddPanier( String prodname,String clientname,String libel,int quant,float prix) throws SQLException {
+		int result=0;
+		String sql = "INSERT INTO PANIER (Client,Produit,Quantite,Libelle,Prix) VALUES (?,?,?,?,?) ";
+		try (Connection connection = myDataSource.getConnection(); 
+		     PreparedStatement stmt = connection.prepareStatement(sql)) {
+                    
+			stmt.setString(1, clientname);
+                        stmt.setString(2, prodname);
+                        stmt.setString(4, libel);
+                        stmt.setInt(3, quant);
+                        stmt.setFloat(5,prix);
+                        
+			result = stmt.executeUpdate();
+		}
+                catch (SQLException ex) {
+			Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+			throw new SQLException(ex.getMessage());
+                        }
                 
+		return result;
+	}
+     
+     public int delPanier( String name) throws SQLException {
+		int result = 0;
+		String sql = "DELETE FROM PANIER WHERE PRODUIT = ?";
+		try (Connection connection = myDataSource.getConnection(); 
+		     PreparedStatement stmt = connection.prepareStatement(sql)) {
+                    
+			stmt.setString(1, name);
+                        
+			result = stmt.executeUpdate();
+		}
+                catch (SQLException ex) {
+			Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+			throw new SQLException(ex.getMessage());
+                        }
 		return result;
 	}
     

@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.DAO;
 import model.DataSourceFactory;
 
@@ -44,6 +45,7 @@ public class AfficheProduit extends HttpServlet {
                String recherche = request.getParameter("recherche");
                recherche = (recherche == null) ? "" : recherche;
 		Properties resultat = new Properties();
+                
 		try {
                    switch (categorie) {
                        case "tous":
@@ -51,6 +53,9 @@ public class AfficheProduit extends HttpServlet {
                            break;
                        case "search":
                            resultat.put("records", dao.affProduit(recherche));
+                           break;
+                       case "panier":
+                           resultat.put("records", dao.affPanier("Maria Anders"));
                            break;
                        default:
                            resultat.put("records", dao.produitparcategorie(categorie));
@@ -72,6 +77,11 @@ public class AfficheProduit extends HttpServlet {
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			out.println(gson.toJson(resultat));
 		}
+    }
+    
+    private String findUserInSession(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        return (session == null) ? null : (String) session.getAttribute("userName");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
