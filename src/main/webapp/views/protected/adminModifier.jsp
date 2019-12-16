@@ -51,51 +51,6 @@
                 </li>
             </ul>
         </nav> 
-        <br/>
-        <div class="container">        
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Référence</th>
-                        <th>Nom</th>
-                        <th>Catégorie</th>
-                        <th>Prix</th>
-                        <th>Fournisseur</th>
-                    </tr>
-                </thead>
-                <thead>
-                     <tr>
-                        <td><input id="new"></td>
-                        <td><input id="new" ></td>
-                        <td><input id="new" ></td>
-                        <td><input id="new" ></td>
-                        <td><input id="new" ></td>
-                    </tr>
-                </thead>
-                <thead>
-                    <tr>
-                        <th>Réapprovisionnement</th>
-                        <th>Quantité par unité</th>
-                        <th>Prix Unitaire</th>
-                        <th>Unités en stock</th>
-                        <th>Unités en Commande</th>
-                    </tr>
-                </thead>
-                <thead>
-                    <tr>
-                        <td><input id="new"></td>
-                        <td><input id="new" ></td>
-                        <td><input id="new" ></td>
-                        <td><input id="new" ></td>
-                        <td><input id="new" ></td>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        <ul class="nav justify-content-center">
-            <a href="http://localhost:10080/Amazonia/views/admin.jsp"><button class="btn btn-success btn-lg" type="submit">Ajouter</button></a>
-        </ul>
-        <br/>
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <ul class="navbar-nav navbar-brand mx-auto">
                 <li class="nav-item">
