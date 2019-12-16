@@ -40,6 +40,9 @@ public class profilController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, DAOException {
+        //UTF-8
+        request.setCharacterEncoding("UTF-8");
+        
         String jspView = "../views/protected/profil.jsp";
         
         String userName = findUserInSession(request);
@@ -66,45 +69,37 @@ public class profilController extends HttpServlet {
     
     private void checkprofil(HttpServletRequest request, DAO dao, ClientEntity result) throws DAOException {
         //Je regarde ce que j'ai mis dans le input
-        String nom = request.getParameter("contact");
-        // puis je l'envoie sur le dao
-        dao.updateCustomer("CONTACT", nom , result.name );
         
         // same pour tous les input
         String ville = request.getParameter("ville");
-        dao.updateCustomer("VILLE", ville , nom  );
+        dao.updateCustomer("VILLE", ville , result.name );
         
         String societe = request.getParameter("societe");
-        dao.updateCustomer("SOCIETE", societe , nom  );
+        dao.updateCustomer("SOCIETE", societe , result.name );
         
         String adresse = request.getParameter("adresse");
-        dao.updateCustomer("ADRESSE", adresse , nom   );
+        dao.updateCustomer("ADRESSE", adresse , result.name  );
         
         String fonction = request.getParameter("fonction");
-        dao.updateCustomer("FONCTION", fonction , nom   );
+        dao.updateCustomer("FONCTION", fonction , result.name  );
         
         String region = request.getParameter("region");
-        dao.updateCustomer("REGION", region , nom  );
+        dao.updateCustomer("REGION", region , result.name );
         
         String cp = request.getParameter("cp");
-        dao.updateCustomer("CODE_POSTAL", cp ,nom  );
+        dao.updateCustomer("CODE_POSTAL", cp ,result.name  );
         
         String pays = request.getParameter("pays");
-        dao.updateCustomer("PAYS", pays , nom   );
+        dao.updateCustomer("PAYS", pays , result.name  );
         
         String tel = request.getParameter("tel");
-        dao.updateCustomer("TELEPHONE", tel ,nom  );
+        dao.updateCustomer("TELEPHONE", tel ,result.name );
         
         String fax = request.getParameter("fax");
-        dao.updateCustomer("FAX", fax ,nom  );
-
-        // si le nom est différent je lui indique que le ndc a changé
-        if (!((result.name).equals(nom))){
-            request.setAttribute("error", "Votre nouveau Nom de Compte est :" + nom);
-        } 
+        dao.updateCustomer("FAX", fax ,result.name );
         
         //Nouvelles données pour empêcher de réafficher l'ancienne après validation
-        ClientEntity result1 = dao.findClient(nom);
+        ClientEntity result1 = dao.findClient(result.name);
         request.setAttribute("nom", result1.name);
         request.setAttribute("client", result1);
 

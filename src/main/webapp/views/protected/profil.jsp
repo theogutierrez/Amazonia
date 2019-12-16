@@ -58,7 +58,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Contact</span>
                 </div>
-                <input type="text" name="contact" value="${nom}"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="contact" value="${nom}"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
             </div>
             <br/>
             <div class="input-group lg-3">
