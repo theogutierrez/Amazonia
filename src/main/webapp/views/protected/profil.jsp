@@ -44,81 +44,86 @@
             </ul>
         </nav> 
         <br/>
+        
         <div class="container">   
+            <form action="<c:url value='/protected/profil'/>" method="post" id ="formConnec" accept-charset="UTF-8">
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Sociéré</span>
+                    <span class="input-group-text" id="inputGroup-sizing-default">Société</span>
                 </div>
-                <input type="text" value="test" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name= "societe" value="${client.societe}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
             <br/>
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Contact</span>
                 </div>
-                <input type="text" value="test" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="contact" value="${nom}"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
             <br/>
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Fonction</span>
                 </div>
-                <input type="text" value="test" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="fonction" value="${client.fonction}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
             <br/>
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Adresse</span>
                 </div>
-                <input type="text" value="test" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="adresse" value="${client.adresse}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
             <br/>
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Ville</span>
                 </div>
-                <input type="text" value="test" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="ville" value="${client.ville}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
             <br/>
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Region</span>
                 </div>
-                <input type="text" value="test" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="region" value="${client.region}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
             <br/>
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Code Postal</span>
                 </div>
-                <input type="text" value="test" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="cp" value="${client.cp}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
             <br/>
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Pays</span>
                 </div>
-                <input type="text" value="test" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="pays" value="${client.pays}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
             <br/>
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Tel</span>
                 </div>
-                <input type="text" value="test" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="tel" value="${client.tel}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
             <br/>
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Fax</span>
                 </div>
-                <input type="text" value="test" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="fax" value="${client.fax}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
+            </form>
+            
             <br/>
             <div class="nav justify-content-center">
-                <button type="button" class="btn btn-success btn-lg">Valider</button>
+                <button type="submit" class="btn btn-success btn-lg" form="formConnec" name="valider" value="login" >Valider</button>
             </div>
         </div>  
+        <div class="col-lg-12 text-center" style="color:red">${error}</div>
         <footer class="page-footer font-small light">
             <div class="container text-center">
                 <small>Copyright Amazonia</small>
