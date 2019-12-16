@@ -41,129 +41,15 @@
             <ul class="navbar-nav navbar-brand mx-auto">
                 
                 <li class="nav-item">
-                    <a class="nav-link"href="#">Statistiques</a>
+                    <a class="nav-link"href="<c:url value='/protected/admin?page=stat'/>">Statistiques</a>
                 </li>                
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Ajouter un produit</a>
+                    <a class="nav-link" href="<c:url value='/protected/admin?page=ajouter'/>">Ajouter un produit</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Modifier des produits</a>
+                    <a class="nav-link" href="<c:url value='/protected/admin?page=modifier'/>">Modifier des produits</a>
                 </li>
             </ul>
-        </nav> 
-        <br/>
-        <div class="container">        
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Référence</th>
-                        <th>Nom</th>
-                        <th>Catégorie</th>
-                        <th>Prix</th>
-                        <th>Fournisseur</th>
-                    </tr>
-                </thead>
-                <thead>
-                     <tr>
-                        <td><input id="new"></td>
-                        <td><input id="new" ></td>
-                        <td><input id="new" ></td>
-                        <td><input id="new" ></td>
-                        <td><input id="new" ></td>
-                    </tr>
-                </thead>
-                <thead>
-                    <tr>
-                        <th>Réapprovisionnement</th>
-                        <th>Quantité par unité</th>
-                        <th>Prix Unitaire</th>
-                        <th>Unités en stock</th>
-                        <th>Unités en Commande</th>
-                    </tr>
-                </thead>
-                <thead>
-                    <tr>
-                        <td><input id="new"></td>
-                        <td><input id="new" ></td>
-                        <td><input id="new" ></td>
-                        <td><input id="new" ></td>
-                        <td><input id="new" ></td>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        <ul class="nav justify-content-center">
-            <a href="http://localhost:10080/Amazonia/views/admin.jsp"><button class="btn btn-success btn-lg" type="submit">Ajouter</button></a>
-        </ul>
-        <br/>
-        <nav class="navbar navbar-expand-sm bg-light navbar-light">
-            <ul class="navbar-nav navbar-brand mx-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Boissons</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Condiments</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Desserts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Produits Laitiers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pâtes et céréales</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Viandes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Produits secs</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Poissons et fruits de mer</a>
-                </li>
-            </ul>
-        </nav> 
-        <div class="container">        
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Référence</th>
-                        <th>Nom</th>
-                        <th>Catégorie</th>
-                        <th>Prix</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input id="coca" placeholder=""></td>
-                        <td><input id="coca" value="coca"></td>
-                        <td><input id="coca" value="Boisson"></td>
-                        <td><input id="coca" value="25€"></td>
-                        
-                        <td><button type="button" class="btn btn-info">Modifier</button></td>
-                        <td><button type="button" class="btn btn-info">Supprimer</button></td>
-                    </tr>
-                    <tr>
-                        <td><input id="coca" placeholder=""></td>
-                        <td><input id="coca" value="coca"></td>
-                        <td><input id="coca" value="Boisson"></td>
-                        <td><input id="coca" value="25€"></td>
-                        
-                        <td><button type="button" class="btn btn-info">Modifier</button></td>
-                        <td><button type="button" class="btn btn-info">Supprimer</button></td>
-                    </tr>
-                    <tr>
-                        <td><input id="coca" placeholder=""></td>
-                        <td><input id="coca" value="coca"></td>
-                        <td><input id="coca" value="Boisson"></td>
-                        <td><input id="coca" value="25€"></td>
-                        
-                        <td><button type="button" class="btn btn-info">Modifier</button></td>
-                        <td><button type="button" class="btn btn-info">Supprimer</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>       
+        </nav>      
     </body>
 </html>

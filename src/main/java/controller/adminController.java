@@ -7,12 +7,17 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.DAO;
+import model.DataSourceFactory;
 
 /**
  *
@@ -20,7 +25,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "admin", urlPatterns = {"/protected/admin"})
 public class adminController extends HttpServlet {
-
+    DAO dao = new DAO(DataSourceFactory.getDataSource());
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,14 +38,30 @@ public class adminController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                 String userName = findUserInSession(request);
-        String jspView;
+                String page = request.getParameter("page");
+        String jspView ="../views/protected/admin.jsp";
         if (!"admin".equals(userName)) { // L'utilisateur n'est pas connecté ou admin
             // On choisit la page de login
             jspView = "../connexion";
             response.sendRedirect(jspView);
         } else { // L'utilisateur est connecté et est admin
-            // On choisit la page d'admin
-            jspView = "../views/protected/admin.jsp";
+            // On choisit la page d'admin suvant la page en paramètre
+            if (null != page) {
+                switch (page) {
+                    case "ajouter":
+                        ajouterProduit(request);
+                        jspView="../views/protected/adminAjouter.jsp";
+                        break;
+                    case "modifer":
+                        jspView="../views/protected/adminModifier.jsp";
+                        break;
+                    case "stat":
+                        jspView = "../views/protected/admin.jsp";
+                        break;
+                }
+            } else {
+                jspView = "../views/protected/admin.jsp";
+            } 
         }
         
         request.getRequestDispatcher(jspView).forward(request, response);
@@ -87,5 +108,26 @@ public class adminController extends HttpServlet {
     private String findUserInSession(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         return (session == null) ? null : (String) session.getAttribute("userName");
+    }
+    
+    private void ajouterProduit(HttpServletRequest request) {
+        String nom = request.getParameter("nom");
+        int categorie = Integer.parseInt(request.getParameter("categorie"));
+        int fournisseur = Integer.parseInt(request.getParameter("founrnisseur"));
+        int reapprovisionnement = Integer.parseInt(request.getParameter("reapprovisionnement"));
+        String quantite = request.getParameter("quantite");
+        float prixU = Float.parseFloat(request.getParameter("prixU"));
+        int uniteS = Integer.parseInt(request.getParameter("uniteS"));
+        int uniteC = Integer.parseInt(request.getParameter("uniteC"));
+        int disponible = Integer.parseInt(request.getParameter("disponible"));
+        
+        try {
+            dao.addProduct(nom, fournisseur, disponible, reapprovisionnement, prixU, uniteC, quantite, categorie, uniteS);
+            request.setAttribute("produitAjouter", "Votre produit a bien été ajouté");
+        } catch (SQLException ex) {
+            Logger.getLogger(adminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }
 }
