@@ -179,7 +179,7 @@ public class TestDao {
     @Test
     public void testPriceByCategorie() throws Exception {
         Map<String, Float> result = new HashMap<>();
-        result = myDAO.priceByCategorie("1900-00-00","2050-00-00");
+        result = myDAO.priceByCategorie("1994-08-04","1996-06-05");
         assertEquals(result.size(), 8);
     }
  

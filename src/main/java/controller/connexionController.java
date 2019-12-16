@@ -45,6 +45,9 @@ public class connexionController extends HttpServlet {
                         case "login":
                                 checkLogin(request);
                                 break;
+                        case "logout":
+                                doLogout(request);
+                                break;
                 }
         }
         String userName = findUserInSession(request);
@@ -94,6 +97,16 @@ public class connexionController extends HttpServlet {
             Logger.getLogger(connexionController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+
+    private void doLogout(HttpServletRequest request) {
+        // On termine la session
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+    }
+    
     private String findUserInSession(HttpServletRequest request) {
             HttpSession session = request.getSession(false);
             return (session == null) ? null : (String) session.getAttribute("userName");

@@ -37,11 +37,22 @@
             </div>
         </nav> 
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
-            <ul class="navbar-nav navbar-brand mx-auto">
-                <li class="nav-item">
-                    <a><h2>Profil</h2></a>
-                </li>
-            </ul>
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            </div>
+            <div class="mx-auto order-0">    
+                <ul class="navbar-nav navbar-brand mx-auto">
+                    <li class="nav-item">
+                        <a><h2>Profil</h2></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                      <a class="btn btn-danger" href="<c:url value='../connexion?action=logout'/>">Déconnecter</a>
+                  </li>
+                </ul>
+            </div>
         </nav> 
         <br/>
         

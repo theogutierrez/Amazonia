@@ -80,16 +80,16 @@
                     <div id="grapheCategorie" class ="text-center"style="width: 900px; height: 500px;"></div>
                 </div>
             </div>
-            <div class="row">
-                <form>
+            <form>
+                <div class="row">
                     <div class="col">
                         <input type="text" class="form-control" value="1900-00-00">
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" value="2100-00-00">
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
             <br/>
             <div class="row">
                 <div class="col text-center">
