@@ -37,8 +37,9 @@ public class adminController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                String userName = findUserInSession(request);
-                String page = request.getParameter("page");
+        String userName = findUserInSession(request);
+        String page = request.getParameter("page");
+        String action = request.getParameter("action");
         String jspView ="../views/protected/admin.jsp";
         if (!"admin".equals(userName)) { // L'utilisateur n'est pas connecté ou admin
             // On choisit la page de login
@@ -49,7 +50,7 @@ public class adminController extends HttpServlet {
             if (null != page) {
                 switch (page) {
                     case "ajouter":
-                        if(request.getParameter("nom") != null) ajouterProduit(request);
+                        if(action == "ajouter") ajouterProduit(request);
                         jspView="../views/protected/adminAjouter.jsp";
                         break;
                     case "modifier":

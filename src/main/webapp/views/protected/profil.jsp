@@ -131,7 +131,7 @@
             
             <br/>
             <div class="nav justify-content-center">
-                <button type="submit" class="btn btn-success btn-lg" form="formConnec" name="valider" value="login" >Valider</button>
+                <button type="submit" class="btn btn-success btn-lg" form="formConnec" name="valider" value="login">Valider</button>
             </div>
         </div>  
         <div class="col-lg-12 text-center" style="color:red">${error}</div>
