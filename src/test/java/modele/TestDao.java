@@ -46,76 +46,72 @@ public class TestDao {
     @Before
     public void setUp() throws SQLException, IOException, SqlToolError {
         myDataSource = getDataSource();
-		myConnection = myDataSource.getConnection();
-		// On initialise la base avec le contenu d'un fichier de test
-		String sqlFilePath = TestDao.class.getResource("testdata.sql").getFile();
-		SqlFile sqlFile = new SqlFile(new File(sqlFilePath));
-		sqlFile.setConnection(myConnection);
-		sqlFile.execute();
-		sqlFile.closeReader();	
-		// On crée l'objet à tester
-		myDAO = new DAO(myDataSource);
+        myConnection = myDataSource.getConnection();
+        // On initialise la base avec le contenu d'un fichier de test
+        String sqlFilePath = TestDao.class.getResource("testdata.sql").getFile();
+        SqlFile sqlFile = new SqlFile(new File(sqlFilePath));
+        sqlFile.setConnection(myConnection);
+        sqlFile.execute();
+        sqlFile.closeReader();	
+        // On crée l'objet à tester
+        myDAO = new DAO(myDataSource);
     }
     
     @After
     public void tearDown() throws SQLException {
-                myConnection.close();		
-		myDAO = null;
+        myConnection.close();		
+        myDAO = null;
     }
     @Test 
     public void numero() throws DAOException {
-		// Paramètres : message si erreur, valeur attendue, valeur réelle
-                
-		assertEquals(8, myDAO.numberOfCategorie());
-	}
+        // Paramètres : message si erreur, valeur attendue, valeur réelle
+
+        assertEquals(8, myDAO.numberOfCategorie());
+    }
     
     @Test 
     public void produitcategori() throws DAOException, SQLException {
-		// Paramètres : message si erreur, valeur attendue, valeur réelle
-                List<Produit> liste =myDAO.produitparcategorie("Viandes");
-	
-               assertEquals(6, liste.size());
-	}
+        // Paramètres : message si erreur, valeur attendue, valeur réelle
+        List<Produit> liste =myDAO.produitparcategorie("Viandes");
+
+       assertEquals(6, liste.size());
+    }
     
     @Test 
     public void findclient() throws DAOException, SQLException {
-		// Paramètres : message si erreur, valeur attendue, valeur réelle
-                ClientEntity  client =myDAO.findClient("Maria Anders");
-		assertEquals("Maria Anders", client.name);
-	}
+        // Paramètres : message si erreur, valeur attendue, valeur réelle
+        ClientEntity  client =myDAO.findClient("Maria Anders");
+        assertEquals("Maria Anders", client.name);
+    }
     
      @Test 
     public void bonmdp() throws DAOException, SQLException {              
-		assertTrue(myDAO.mdp("Maria Anders", "ALFKI"));
-	}
+        assertTrue(myDAO.mdp("Maria Anders", "ALFKI"));
+    }
     
      @Test 
     public void mauvaisMdp() throws DAOException, SQLException {              
-		assertFalse(myDAO.mdp("Maria An", "ALFKI"));
-	}
+        assertFalse(myDAO.mdp("Maria An", "ALFKI"));
+    }
     
     @Test 
     public void modification() throws DAOException, SQLException {
-                ClientEntity  client =myDAO.findClient("Maria Anders");
-                String adress=client.Adresse;
-                myDAO.updateCustomer("ADRESSE", "Obere Str. 56", "Maria Anders");
-                String adress2=myDAO.findClient("Maria Anders").Adresse;
-      
-		assertFalse(adress.equals(adress2));
-                
-	}
+        ClientEntity  client =myDAO.findClient("Maria Anders");
+        String adress=client.Adresse;
+        myDAO.updateCustomer("ADRESSE", "Obere Str. 56", "Maria Anders");
+        String adress2=myDAO.findClient("Maria Anders").Adresse;
+
+        assertFalse(adress.equals(adress2));
+    }
     
     @Test 
     public void TestmAffPANIER() throws DAOException, SQLException {
-                myDAO.AddPanier("Chai","ALFKI"  ,"Boissons", 1, (float) 90.00);
-                List<LignePanier> panier = new LinkedList<>();
-                       panier= myDAO.affPanier("ALFKI");
-                int taille=panier.size();
-               
-               
-      
-		assertTrue(taille==1);
-                
+        myDAO.AddPanier("Chai","ALFKI"  ,"Boissons", 1, (float) 90.00);
+        List<LignePanier> panier = new LinkedList<>();
+               panier= myDAO.affPanier("ALFKI");
+        int taille=panier.size();
+        
+        assertTrue(taille==1);               
     }
     
     @Test 
@@ -136,25 +132,23 @@ public class TestDao {
     }
     
     @Test 
-    public void TestDelProduit() throws DAOException, SQLException {
-                
-                int taille=myDAO.produit().size();
-                myDAO.delProduct("Chai");
-                
-                assertTrue(myDAO.produit().size()==taille-1);
+    public void TestDelProduit() throws DAOException, SQLException {               
+        int taille=myDAO.produit().size();
+        myDAO.delProduct("Chai");
+
+        assertTrue(myDAO.produit().size()==taille-1);
 	
-	}
+    }
     
-     @Test 
+    @Test 
     public void TestAddPanier() throws DAOException, SQLException {
                 
-                int taille=myDAO.produit().size();
-                myDAO.delProduct("Chai");
-                
-                assertTrue(myDAO.produit().size()==taille-1);
+        int taille=myDAO.produit().size();
+        myDAO.delProduct("Chai");
+
+        assertTrue(myDAO.produit().size()==taille-1);
 	
-	}
-    
+    }    
     
     @Test
     public void canCreateCommande() throws Exception {
@@ -219,11 +213,11 @@ public class TestDao {
     }
     
     public static DataSource getDataSource() throws SQLException {
-		org.hsqldb.jdbc.JDBCDataSource ds = new org.hsqldb.jdbc.JDBCDataSource();
-		ds.setDatabase("jdbc:hsqldb:mem:testcase;shutdown=true");
-		ds.setUser("sa");
-		ds.setPassword("sa");
-		return ds;
+        org.hsqldb.jdbc.JDBCDataSource ds = new org.hsqldb.jdbc.JDBCDataSource();
+        ds.setDatabase("jdbc:hsqldb:mem:testcase;shutdown=true");
+        ds.setUser("sa");
+        ds.setPassword("sa");
+        return ds;
     }
    
     

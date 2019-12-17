@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,10 +46,12 @@ public class statAdmin extends HttpServlet {
         String dateDeb = request.getParameter("datedeb");
         String dateFin = request.getParameter("datefin");
         Properties resultat = new Properties();
+        Map<String, Float> result = new HashMap<>();
             try {
                 switch (type) {
                     case "categorie":
-                        resultat.put("records", dao.priceByCategorie("1994-08-04", "1996-06-05"));
+                        result=dao.priceByCategorie("1994-08-04", "1996-06-05");
+                        resultat.put("records", result);
                         break;
                     case "pays":
                         resultat.put("records", dao.priceByCountry(dateDeb, dateFin));

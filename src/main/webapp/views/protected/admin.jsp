@@ -30,17 +30,6 @@
         <script type="text/javascript">
             google.charts.load("current", {packages:["corechart"]});
             google.charts.setOnLoadCallback(searchAll("1994-08-04","1996-06-05"));
-            function drawChart(dataTab) {
-                var data = google.visualization.arrayToDataTable(dataTab);
-
-                var options = {
-                    title: 'Chiffre d\'affaire par catégorie',
-                    is3D: true,
-                };
-
-                var chart = new google.visualization.PieChart(document.getElementById('grapheCategorie'));
-                chart.draw(data, options);
-            }
             
             function searchAll(dateDeb,dateFin) {
                 $.ajax({
@@ -53,6 +42,8 @@
                             function (result) {
                                 var data = [];
                                 data.push(["Catégorie", "CA"]);
+                                data.push(['Essai 1',3]);
+                                data.push(['Essai 2',4]);
                                 for(var id in result.records) {
                                     data.push([id, result.records[id]]);
                                 }
@@ -61,6 +52,18 @@
                     error: showError
                 });                
             }
+            function drawChart(dataTab) {
+                var data = google.visualization.arrayToDataTable(dataTab);
+
+                var options = {
+                    title: 'Chiffre d\'affaire par catégorie',
+                    is3D: true,
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('grapheCategorie'));
+                chart.draw(data, options);
+            }
+            
           
         </script>   
     </head>
