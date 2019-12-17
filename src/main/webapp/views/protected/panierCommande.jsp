@@ -44,7 +44,7 @@
                     <a class="nav-link"href="<c:url value='/protected/panier?page=panier'/>">Panier</a>
                 </li>                
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value='/protected/panier?page=commande'/>">Commandes</a>
+                    <a class="nav-link" href="<c:url value='/protected/panier?page=commande'/>">Commande</a>
                 </li>
                 
             </ul>
@@ -56,7 +56,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Numéro</span>
                 </div>
-                <input type="text" name= "numero" value="${commande.numero}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name= "numero" value="${commande.numero}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
             </div>
             <br/>
             <div class="input-group lg-3">
@@ -68,58 +68,58 @@
             <br/>
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Fonction</span>
+                    <span class="input-group-text" id="inputGroup-sizing-default">Commande</span>
                 </div>
-                <input type="text" name="fonction" value="${client.fonction}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="fonction" value="${commande.commande}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
             </div>
             <br/>
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Adresse</span>
+                    <span class="input-group-text" id="inputGroup-sizing-default">Envoyée le</span>
                 </div>
-                <input type="text" name="adresse" value="${client.adresse}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="adresse" value="${commande.envoyeLe}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"disabled>
             </div>
             <br/>
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Ville</span>
+                    <span class="input-group-text" id="inputGroup-sizing-default">Destinataire</span>
                 </div>
-                <input type="text" name="ville" value="${client.ville}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="ville" value="${commande.destinataire}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"disabled>
             </div>
             <br/>
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Region</span>
+                    <span class="input-group-text" id="inputGroup-sizing-default">Adresse Livraison</span>
                 </div>
-                <input type="text" name="region" value="${client.region}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="region" value="${commande.adresseLivr}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"disabled>
             </div>
             <br/>
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Code Postal</span>
+                    <span class="input-group-text" id="inputGroup-sizing-default">Quantité</span>
                 </div>
-                <input type="text" name="cp" value="${client.cp}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="cp" value="${commande.quantite}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"disabled>
             </div>
             <br/>
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Pays</span>
+                    <span class="input-group-text" id="inputGroup-sizing-default">Prix Unitaire</span>
                 </div>
-                <input type="text" name="pays" value="${client.pays}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="pays" value="${commande.prixUni}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"disabled>
             </div>
             <br/>
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Tel</span>
+                    <span class="input-group-text" id="inputGroup-sizing-default">Quantité par unité</span>
                 </div>
-                <input type="text" name="tel" value="${client.tel}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="tel" value="${commande.quantiteUni}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"disabled>
             </div>
             <br/>
             <div class="input-group lg-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Fax</span>
+                    <span class="input-group-text" id="inputGroup-sizing-default">Remise</span>
                 </div>
-                <input type="text" name="fax" value="${client.fax}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" name="fax" value="${commande.remise}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"disabled>
             </div>
             </form>
            

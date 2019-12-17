@@ -107,7 +107,7 @@
                     <a class="nav-link"href="<c:url value='/protected/panier?page=panier'/>">Panier</a>
                 </li>                
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value='/protected/panier?page=commande'/>">Commandes</a>
+                    <a class="nav-link" href="<c:url value='/protected/panier?page=commande'/>">Commande</a>
                 </li>
    
             </ul>
