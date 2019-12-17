@@ -317,6 +317,7 @@ public class DAO {
 
 		return result;
 	}
+    
     public boolean mdp(String contact,String mdp) throws DAOException {
 		String result = null;
 
@@ -476,6 +477,57 @@ public class DAO {
 				
 			}
 		}
+		return result;
+	}
+    
+    public commandeClient Commandes(String contact) throws DAOException {
+		commandeClient result = null;
+
+		String sql = "SELECT * FROM (COMMANDE inner join LIGNE on COMMANDE.NUMERO=LIGNE.COMMANDE) inner join PRODUIT on PRODUIT.REFERENCE=LIGNE.PRODUIT ";
+		try (Connection connection = myDataSource.getConnection(); // On crée un statement pour exécuter une requête
+			PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+			stmt.setString(1, contact);
+			try (ResultSet rs = stmt.executeQuery()) {
+				if (rs.next()) { // On a trouvé
+                                        String numero=rs.getString("NUMERO");
+                                        String client=rs.getString("CLIENT");
+					String saisieLe = rs.getString("SAISIE_LE");
+                                        String envoyeLe=rs.getString("ENVOYEE_LE");
+					String port= rs.getString("PORT");
+					String destinataire=rs.getString("DESTINATAIRE");
+                                        String adresseLivr=rs.getString("ADRESSE_LIVRAISON");
+					String villeLivr = rs.getString("VILLE_LIVRAISON");
+					String regionLivr=rs.getString("REGION_LIVRAISON");
+                                        String cpLivr=rs.getString("CODE_POSTAL_LIVRAIS");
+                                        String paysLivr=rs.getString("PAYS_LIVRAISON");
+                                        String remise=rs.getString("REMISE");
+                                        
+                                        String commande=rs.getString("COMMANDE");
+                                        String produit=rs.getString("PRODUIT");
+					String quantite = rs.getString("QUANTITE");
+                                        String reference=rs.getString("REFERENCE");
+					String nom= rs.getString("NOM");
+					String fournisseur=rs.getString("FOURNISSEUR");
+                                        String categorie=rs.getString("CATEGORIE");
+					String quantiteUni = rs.getString("QUANTITE_PAR_UNITE");
+					String prixUni=rs.getString("PRIX_UNITAIRE");
+                                        String uniteStock=rs.getString("UNITES_EN_STOCK");
+                                        String uniteCom=rs.getString("UNITES_COMMANDEES");
+                                        String niveauReap=rs.getString("NIVEAU_DE_REAPPRO");
+                                        String indisponible=rs.getString("INDISPONIBLE");
+                                        
+                                        
+					// On crée l'objet 
+                                       
+					result = new commandeClient(numero,client,saisieLe,envoyeLe,port,destinataire,adresseLivr,villeLivr,regionLivr,cpLivr,paysLivr,remise,commande, produit,quantite, reference, nom, fournisseur, categorie, quantiteUni, prixUni, uniteStock, uniteCom, niveauReap, indisponible);
+				} // else on n'a pas trouvé, on renverra null
+			}
+		}  catch (SQLException ex) {
+			Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+			throw new DAOException(ex.getMessage());
+		}
+
 		return result;
 	}
     

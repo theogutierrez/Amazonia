@@ -49,8 +49,80 @@
                 
             </ul>
         </nav>
-        <div class="col text-center">
-                    <button type="submit" class="btn btn-success btn-lg" form="formCategorie"  name="action" value="Valider">Ajouter</button>              
-        </div> 
+        <br/>
+        <div class="container">   
+            <form action="<c:url value='/protected/panierCommande'/>" method="post" id ="formConnec" accept-charset="UTF-8">
+            <div class="input-group lg-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Numéro</span>
+                </div>
+                <input type="text" name= "numero" value="${commande.numero}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <br/>
+            <div class="input-group lg-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Client</span>
+                </div>
+                <input type="text" name="client" value="${nom}"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
+            </div>
+            <br/>
+            <div class="input-group lg-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Fonction</span>
+                </div>
+                <input type="text" name="fonction" value="${client.fonction}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <br/>
+            <div class="input-group lg-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Adresse</span>
+                </div>
+                <input type="text" name="adresse" value="${client.adresse}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <br/>
+            <div class="input-group lg-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Ville</span>
+                </div>
+                <input type="text" name="ville" value="${client.ville}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <br/>
+            <div class="input-group lg-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Region</span>
+                </div>
+                <input type="text" name="region" value="${client.region}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <br/>
+            <div class="input-group lg-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Code Postal</span>
+                </div>
+                <input type="text" name="cp" value="${client.cp}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <br/>
+            <div class="input-group lg-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Pays</span>
+                </div>
+                <input type="text" name="pays" value="${client.pays}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <br/>
+            <div class="input-group lg-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Tel</span>
+                </div>
+                <input type="text" name="tel" value="${client.tel}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <br/>
+            <div class="input-group lg-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Fax</span>
+                </div>
+                <input type="text" name="fax" value="${client.fax}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            </form>
+           
+        </div>
     </body>
 </html>
