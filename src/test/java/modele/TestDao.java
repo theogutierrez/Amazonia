@@ -119,21 +119,20 @@ public class TestDao {
 	}
     @Test 
     public void TestAddProduit() throws DAOException, SQLException {
-                String name="Coca-Cola";
-                int fourni=1;
-                int dispo=0;
-                int nx=0;
-                float pxuni=(float) 30.00;    
-                int pxinuec=20;
-                String quant="20 BOITES X 10 BOUTEILLE";
-                int cate=1;
-                int unitstock=200;
-                int taille=myDAO.produit().size();
-                myDAO.addProduct(name, fourni, dispo, nx, pxuni, pxinuec, quant, cate, unitstock);
-                
-                assertTrue(myDAO.produit().size()==taille+1);
-	
-	}
+        String name="Coca-Cola";
+        int fourni=1;
+        int dispo=0;
+        int nx=0;
+        float pxuni=(float) 30.00;    
+        int pxinuec=20;
+        String quant="20 BOITES X 10 BOUTEILLE";
+        int cate=1;
+        int unitstock=200;
+        int taille=myDAO.produit().size();
+        myDAO.addProduct(name, fourni, dispo, nx, pxuni, pxinuec, quant, cate, unitstock);
+
+        assertTrue(myDAO.produit().size()==taille+1);
+    }
     
     @Test 
     public void TestDelProduit() throws DAOException, SQLException {

@@ -42,14 +42,8 @@ public class AffCatego extends HttpServlet {
                 String categorie = request.getParameter("categorie");
                                                         
 		Properties resultat = new Properties();
-		try {
-                        
-                            resultat.put("records", dao.produitparcategorie(categorie));	
-                        						
-					
-				
-			
-			
+		try {    
+                    resultat.put("records", dao.produitparcategorie(categorie));		
 		} catch (SQLException ex) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			resultat.put("records", Collections.EMPTY_LIST);

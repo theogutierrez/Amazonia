@@ -27,7 +27,7 @@
                 // On fait un appel AJAX pour chercher les codes
                
                 $.ajax({
-                    url: "affProduit",
+                    url: "../affProduit",
                     dataType: "json",
                     type : 'GET',
                     contentType:"application/x-www-form-urlencoded; charset=UTF-8",
@@ -55,7 +55,7 @@
                 // On fait un appel AJAX pour chercher les codes
                 
                 $.ajax({
-                    url: "AddDelete",
+                    url: "../AddDelete",
                     dataType: "json",
                     data:"AddOrDel="+cat+"&prodname="+$("#nom"+id).html()+"&libel="+$("#libel"+id).html()+"&quant="+$("#quantite"+id+" option:selected").val()+"&prix="+$("#prix"+id).html(),
                     error: showError,

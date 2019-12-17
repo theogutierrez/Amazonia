@@ -10,10 +10,61 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Admin</title>
         <link rel="stylesheet" href="../bootstrap-4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="../CSS/main.css">
+        <script	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
         <script src="https://kit.fontawesome.com/47131369cd.js" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(// Exécuté à la fin du chargement de la page
+                function () {
+                    // On montre la liste des codes
+                    affProduit("tous");
+                }           
+            );
+            function affProduit(cat) {
+            // On fait un appel AJAX pour chercher les codes
+               
+                $.ajax({
+                    url:  '../affProduit',
+                    dataType: "json",
+                    type : 'GET',
+                    contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+                    data:"categorie="+cat+"&recherche="+$("#search").val(),
+                    error: showError,
+                    success: // La fonction qui traite les résultats
+                        function (result) {
+                            var template = $('#codesTemplate').html();
+                            // On combine le template avec le résultat de la requête
+                            var processedTemplate = Mustache.to_html(template, result);
+                            // On affiche la liste des options dans le select
+                            $('#codes').html(processedTemplate);  
+                        }
+                });                                                           
+            }
+            
+            function supprProduit(nom) {
+                $.ajax({
+                    url:  "admin",              
+                    dataType: "json",               
+                    type : 'GET',
+                    contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+                    data:"page=modifier&action=supprimer&nom="+nom,
+                    error: showError,
+                    success: // La fonction qui traite les résultats
+                        function (result) {
+                            affProduit("tous");
+                            console.log(result); 
+                        }
+                });
+                return false;
+            }
+            // Fonction qui traite les erreurs de la requête
+            function showError(xhr, status, message) {
+                alert(xhr.responseText);
+            }
+        </script>    
     </head>
         <body>      
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
@@ -29,10 +80,7 @@
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                      <a class="nav-link" href=""><h4>Panier <i class="fas fa-shopping-cart"></i></h4></a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href=""><h4>Connexion <i class="fas fa-sign-in-alt"></i></h4></a>
+                    <a class="btn btn-danger" href="<c:url value='../connexion?action=logout'/>">Déconnecter</a>
                   </li>
                 </ul>
             </div>
@@ -47,35 +95,35 @@
                     <a class="nav-link" href="<c:url value='/protected/admin?page=ajouter'/>">Ajouter un produit</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value='/protected/admin?page=modifer'/>">Modifier des produits</a>
+                    <a class="nav-link" href="<c:url value='/protected/admin?page=modifier'/>">Modifier des produits</a>
                 </li>
             </ul>
         </nav> 
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <ul class="navbar-nav navbar-brand mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Boissons</a>
+                    <a class="nav-link"  onclick="affProduit('Boissons')" href="#">Boissons</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Condiments</a>
+                    <a class="nav-link" onclick="affProduit('Condiments')" href="#">Condiments</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Desserts</a>
+                    <a class="nav-link" onclick="affProduit('Desserts')" href="#">Desserts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Produits Laitiers</a>
+                    <a class="nav-link" onclick="affProduit('Produit laitiers')" href="#">Produits Laitiers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pâtes et céréales</a>
+                    <a class="nav-link" onclick="affProduit('Pâtes et céréales')" href="#" >Pâtes et céréales</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Viandes</a>
+                    <a class="nav-link" onclick="affProduit('Viandes')" href="#">Viandes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Produits secs</a>
+                    <a class="nav-link" onclick="affProduit('Produit secs')" href="#">Produits secs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Poissons et fruits de mer</a>
+                    <a class="nav-link" onclick="affProduit('Poissons et fruits de mer')" href="#">Poissons et fruits de mer</a>
                 </li>
             </ul>
         </nav> 
@@ -89,36 +137,28 @@
                         <th>Prix</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td><input id="coca" placeholder=""></td>
-                        <td><input id="coca" value="coca"></td>
-                        <td><input id="coca" value="Boisson"></td>
-                        <td><input id="coca" value="25€"></td>
-                        
-                        <td><button type="button" class="btn btn-info">Modifier</button></td>
-                        <td><button type="button" class="btn btn-info">Supprimer</button></td>
-                    </tr>
-                    <tr>
-                        <td><input id="coca" placeholder=""></td>
-                        <td><input id="coca" value="coca"></td>
-                        <td><input id="coca" value="Boisson"></td>
-                        <td><input id="coca" value="25€"></td>
-                        
-                        <td><button type="button" class="btn btn-info">Modifier</button></td>
-                        <td><button type="button" class="btn btn-info">Supprimer</button></td>
-                    </tr>
-                    <tr>
-                        <td><input id="coca" placeholder=""></td>
-                        <td><input id="coca" value="coca"></td>
-                        <td><input id="coca" value="Boisson"></td>
-                        <td><input id="coca" value="25€"></td>
-                        
-                        <td><button type="button" class="btn btn-info">Modifier</button></td>
-                        <td><button type="button" class="btn btn-info">Supprimer</button></td>
-                    </tr>
+                <tbody id="codes">
+                  
                 </tbody>
-            </table>
-        </div>       
+            </table>    
+        </div>  
+        <script id="codesTemplate" type="text/template">
+            <TABLE>
+            
+            {{! Pour chaque enregistrement }}
+            {{#records}}
+                {{! Une ligne dans la table }}
+                <tr>
+                    <td id="produit_id{{produit_id}}">{{produit_id}}</td>
+                    <td id="nom{{produit_id}}">{{name}}</td>
+                    <td id="libel{{produit_id}}">{{label}}</td>
+                    <td id="prix{{produit_id}}">{{prix_unitaire}}€</td>
+                    <td ><button  type="button" id={{produit_id}} class="btn btn-info">Modifier</button>
+                    <button  type="button" id={{produit_id}} onclick="supprProduit('{{name}}')" class="btn btn-danger">Supprimer</button></td> 
+          
+                </tr>
+            {{/records}}
+            </TABLE>
+        </script>
     </body>
 </html>

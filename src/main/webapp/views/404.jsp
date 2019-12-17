@@ -12,6 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Accueil</title>
         <link rel="stylesheet" href="bootstrap-4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../bootstrap-4.3.1/css/bootstrap.min.css">
         <script src="https://kit.fontawesome.com/47131369cd.js" crossorigin="anonymous"></script>
     </head>
     <body>  

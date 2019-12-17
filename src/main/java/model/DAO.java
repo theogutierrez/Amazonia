@@ -197,7 +197,7 @@ public class DAO {
                 catch (SQLException ex) {
 			Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
 			throw new SQLException(ex.getMessage());
-                        }
+                }
                 
 		return result;
 	}

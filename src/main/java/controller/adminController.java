@@ -5,9 +5,13 @@
  */
 package controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -50,11 +54,18 @@ public class adminController extends HttpServlet {
             if (null != page) {
                 switch (page) {
                     case "ajouter":
-                        if(action == "ajouter") ajouterProduit(request);
-                        jspView="../views/protected/adminAjouter.jsp";
+                        if(action == "ajouter") { 
+                            ajouterProduit(request);
+                        } else {
+                            jspView="../views/protected/adminAjouter.jsp";
+                        }
                         break;
                     case "modifier":
-                        jspView="../views/protected/adminModifier.jsp";
+                        if (action =="supprimer") {
+                            supprimerProduit(request,response);
+                        } else {
+                            jspView="../views/protected/adminModifier.jsp";
+                        }
                         break;
                     case "stat":
                         jspView = "../views/protected/admin.jsp";
@@ -131,4 +142,38 @@ public class adminController extends HttpServlet {
         
         
     }
+    private void supprimerProduit(HttpServletRequest request, HttpServletResponse response) {
+        String nom = request.getParameter("nom");      
+		String message;
+		try {
+			int count = dao.delProduct(nom);
+			// Générer du JSON
+			if (count == 1) {
+				message = String.format("Code %s supprimé", nom);
+			} else {
+				message = String.format("Code %s inconnu", nom);
+			}
+		} catch (SQLIntegrityConstraintViolationException e) {
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			message = String.format("Impossible de supprimer '%s', ce code est utilisé", nom);
+		}
+		catch (SQLException ex) {
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			message = ex.getMessage();
+		}
+		
+		Properties resultat = new Properties();
+		resultat.put("message", message);
+		
+		try (PrintWriter out = response.getWriter()) {
+			// On spécifie que la servlet va générer du JSON
+			response.setContentType("application/json;charset=UTF-8");
+			// Générer du JSON
+			Gson gson = new Gson();
+			out.println(gson.toJson(resultat));
+		} catch (IOException ex) {
+                    Logger.getLogger(adminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

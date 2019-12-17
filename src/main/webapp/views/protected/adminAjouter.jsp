@@ -29,11 +29,9 @@
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                      <a class="nav-link" href=""><h4>Panier <i class="fas fa-shopping-cart"></i></h4></a>
+                       <a class="btn btn-danger" href="<c:url value='../connexion?action=logout'/>">Déconnecter</a>
                   </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href=""><h4>Connexion <i class="fas fa-sign-in-alt"></i></h4></a>
-                  </li>
+
                 </ul>
             </div>
         </nav> 
