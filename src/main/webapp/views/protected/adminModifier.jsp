@@ -30,6 +30,7 @@
                     url:  '../affProduit',
                     dataType: "json",
                     type : 'GET',
+                    xhrFields: { withCredentials:true }, 
                     contentType:"application/x-www-form-urlencoded; charset=UTF-8",
                     data:"categorie="+cat+"&recherche="+$("#search").val(),
                     error: showError,
@@ -49,6 +50,7 @@
                     url:  "admin",              
                     dataType: "json",               
                     type : 'GET',
+                    xhrFields: { withCredentials:true }, 
                     contentType:"application/x-www-form-urlencoded; charset=UTF-8",
                     data:"page=modifier&action=supprimer&nom="+nom,
                     error: showError,
@@ -69,12 +71,12 @@
         <body>      
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-              <a class="navbar-brand" href="<c:url value='/'/>"><img src ="../images/logo_amazonia.png" alt= width="120" height="75"></a>
+              <a class="navbar-brand"><img src ="../images/logo_amazonia.png" alt= width="120" height="75"></a>
             </div>
             <div class="mx-auto order-0">
-                <form class="form-inline navbar-brand mx-auto" action="/action_page.php">
-                  <input class="form-control input-group-btn" type="text" placeholder="Rechercher">
-                  <button class="btn btn-success" type="submit">Rechercher</button>
+                <form class="form-inline navbar-brand mx-auto" >
+                  <input class="form-control input-group-btn" id="search" type="text" placeholder="Rechercher">
+                  <button class="btn btn-success" id="recherche" onclick="affProduit('search')" type="button">Rechercher</button>
                 </form>
             </div>
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">

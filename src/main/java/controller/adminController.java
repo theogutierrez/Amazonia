@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Properties;
@@ -41,6 +42,7 @@ public class adminController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String userName = findUserInSession(request);
         String page = request.getParameter("page");
         String action = request.getParameter("action");
@@ -53,15 +55,16 @@ public class adminController extends HttpServlet {
             // On choisit la page d'admin suvant la page en paramètre
             if (null != page) {
                 switch (page) {
-                    case "ajouter":
-                        if(action == "ajouter") { 
-                            ajouterProduit(request);
+                    case "ajouter":   
+                        if("ajouter".equals(action)) { 
+                            ajouterProduit(request,response);
+                            jspView="../views/protected/adminAjouter.jsp";
                         } else {
                             jspView="../views/protected/adminAjouter.jsp";
                         }
                         break;
                     case "modifier":
-                        if (action =="supprimer") {
+                        if ("supprimer".equals(action)) {
                             supprimerProduit(request,response);
                         } else {
                             jspView="../views/protected/adminModifier.jsp";
@@ -122,27 +125,41 @@ public class adminController extends HttpServlet {
         return (session == null) ? null : (String) session.getAttribute("userName");
     }
     
-    private void ajouterProduit(HttpServletRequest request) {
+    private void ajouterProduit(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(adminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String nom = request.getParameter("nom");
         int categorie = Integer.parseInt(request.getParameter("categorie"));
         int fournisseur = Integer.parseInt(request.getParameter("fournisseur"));
         int reapprovisionnement = Integer.parseInt(request.getParameter("reapprovisionnement"));
         String quantite = request.getParameter("quantite");
-        float prixU = Float.parseFloat(request.getParameter("prixU"));
+        float prixU = (float) Float.parseFloat(request.getParameter("prixU"));
         int uniteS = Integer.parseInt(request.getParameter("uniteS"));
         int uniteC = Integer.parseInt(request.getParameter("uniteC"));
         int disponible = Integer.parseInt(request.getParameter("disponible"));
-        
+        String jspView="../views/protected/adminAjouter.jsp";
         try {
             dao.addProduct(nom, fournisseur, disponible, reapprovisionnement, prixU, uniteC, quantite, categorie, uniteS);
             request.setAttribute("produitAjouter", "Votre produit a bien été ajouté");
         } catch (SQLException ex) {
             Logger.getLogger(adminController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("erreurProduitAjouter", "Les valeurs saisies sont incorectes ou déjà présentent dans la BD");
         }
-        
-        
+        try {
+            request.getRequestDispatcher(jspView).forward(request, response);
+        } catch (IOException ex) {
+            Logger.getLogger(adminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     private void supprimerProduit(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(adminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String nom = request.getParameter("nom");      
 		String message;
 		try {

@@ -188,9 +188,35 @@ public class TestDao {
         result = myDAO.priceByCategorie("1994","1996-08-04");
         assertEquals(result.size(), 0);
     }
-        
-    
+
+    @Test
+    public void testPriceByCountry() throws Exception {
+        Map<String, Float> result = new HashMap<>();
+        result = myDAO.priceByCountry("1994-08-04","1996-06-05");
+        assertEquals(result.size(), 21);
+    }
  
+    @Test
+    public void testErrorPriceByCountry() throws Exception {
+        Map<String, Float> result = new HashMap<>();
+        result = myDAO.priceByCountry("1994","1996-08-04");
+        assertEquals(result.size(), 0);
+    }
+
+    @Test
+    public void testPriceByClient() throws Exception {
+        Map<String, Float> result = new HashMap<>();
+        result = myDAO.priceByClient("1994-08-04","1996-06-05");
+        assertEquals(result.size(), 89);
+    } 
+ 
+    @Test
+    public void testErrorPriceByClient() throws Exception {
+        Map<String, Float> result = new HashMap<>();
+        result = myDAO.priceByClient("1994","1996-08-04");
+        assertEquals(result.size(), 0);
+    }
+    
     public static DataSource getDataSource() throws SQLException {
 		org.hsqldb.jdbc.JDBCDataSource ds = new org.hsqldb.jdbc.JDBCDataSource();
 		ds.setDatabase("jdbc:hsqldb:mem:testcase;shutdown=true");

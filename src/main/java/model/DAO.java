@@ -517,4 +517,67 @@ public class DAO {
 	}
         return result;      
     }
+    
+    /**
+     * Méthode pour récupérer les CA par pays
+     * @param dateDebut
+     * @param dateFin
+     * @return 
+     * @throws java.sql.SQLException 
+     */
+    public Map<String, Float> priceByCountry(String dateDebut, String dateFin) throws SQLException {
+        Map<String, Float> result = new HashMap<>();
+        String sql ="SELECT SUM(QUANTITE*PRIX_UNITAIRE) AS TOTAL,PAYS_LIVRAISON\n" +
+                    "FROM PRODUIT\n" +
+                    "INNER JOIN LIGNE ON LIGNE.PRODUIT = PRODUIT.REFERENCE\n" +
+                    "INNER JOIN COMMANDE ON COMMANDE.NUMERO = LIGNE.COMMANDE\n" +
+                    "WHERE COMMANDE.SAISIE_LE BETWEEN ? AND ? \n" +
+                    "GROUP BY COMMANDE.PAYS_LIVRAISON ORDER BY TOTAL;";
+        try (Connection connection = myDataSource.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1,dateDebut);
+            stmt.setString(2,dateFin);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String libelle = rs.getString("PAYS_LIVRAISON");
+                float total = rs.getFloat("TOTAL");
+                result.put(libelle, total);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+	}
+        return result;      
+    }
+
+    /**
+     * Méthode pour récupérer les CA par client
+     * @param dateDebut
+     * @param dateFin
+     * @return 
+     * @throws java.sql.SQLException 
+     */
+    public Map<String, Float> priceByClient(String dateDebut, String dateFin) throws SQLException {
+        Map<String, Float> result = new HashMap<>();
+        String sql ="SELECT SUM(QUANTITE*PRIX_UNITAIRE) AS TOTAL,CONTACT\n" +
+                    "FROM PRODUIT\n" +
+                    "INNER JOIN LIGNE ON LIGNE.PRODUIT = PRODUIT.REFERENCE\n" +
+                    "INNER JOIN COMMANDE ON COMMANDE.NUMERO = LIGNE.COMMANDE\n" +
+                    "INNER JOIN CLIENT ON COMMANDE.CLIENT = CLIENT.CODE\n" +
+                    "WHERE COMMANDE.SAISIE_LE BETWEEN ? AND ? \n" +
+                    "GROUP BY CLIENT.CONTACT ORDER BY TOTAL;";
+        try (Connection connection = myDataSource.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1,dateDebut);
+            stmt.setString(2,dateFin);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String libelle = rs.getString("CONTACT");
+                float total = rs.getFloat("TOTAL");
+                result.put(libelle, total);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+	}
+        return result;      
+    }
 }
