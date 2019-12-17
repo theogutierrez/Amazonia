@@ -31,7 +31,20 @@ public class panierController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String page = request.getParameter("page");
         String jspView = "../views/protected/panier.jsp";
+        if (null != page) {
+                switch (page) {
+                    case "commande":
+                        jspView="../views/protected/panierCommande.jsp";
+                        break;
+                    case "panier":
+                        jspView = "../views/protected/panier.jsp";
+                        break;
+                }
+            } else {
+                jspView = "../views/protected/panier.jsp";
+            } 
         request.getRequestDispatcher(jspView).forward(request, response);
     }
 

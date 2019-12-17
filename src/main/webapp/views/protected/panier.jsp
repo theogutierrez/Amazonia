@@ -102,6 +102,18 @@
         </nav> 
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <ul class="navbar-nav navbar-brand mx-auto">
+                
+                <li class="nav-item">
+                    <a class="nav-link"href="<c:url value='/protected/panier?page=panier'/>">Panier</a>
+                </li>                
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value='/protected/panier?page=commande'/>">Commandes</a>
+                </li>
+   
+            </ul>
+        </nav>
+        <nav class="navbar navbar-expand-sm bg-light navbar-light">
+            <ul class="navbar-nav navbar-brand mx-auto">
                 <li class="nav-item">
                     <a><h2>Panier</h2></a>
                 </li>
