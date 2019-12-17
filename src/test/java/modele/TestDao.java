@@ -116,7 +116,8 @@ public class TestDao {
       
 		assertTrue(taille==1);
                 
-	}
+    }
+    
     @Test 
     public void TestAddProduit() throws DAOException, SQLException {
         String name="Coca-Cola";

@@ -20,8 +20,6 @@
         <script>
             $(document).ready(// Exécuté à la fin du chargement de la page
                 function () {
-                    // On montre la liste des codes
-                    searchAll("categorie","1994-08-04","1996-06-05");
                 }
             );
             // Fonction qui traite les erreurs de la requête
@@ -31,13 +29,13 @@
         </script>
         <script type="text/javascript">
             google.charts.load("current", {packages:["corechart"]});
-            google.charts.setOnLoadCallback(searchAll("categorie",'1994-08-04','1996-06-05'));
+            google.charts.setOnLoadCallback(searchAll("1994-08-04","1996-06-05"));
             function drawChart(dataTab) {
                 var data = google.visualization.arrayToDataTable(dataTab);
 
                 var options = {
                     title: 'Chiffre d\'affaire par catégorie',
-                    is3D: true
+                    is3D: true,
                 };
 
                 var chart = new google.visualization.PieChart(document.getElementById('grapheCategorie'));
@@ -50,7 +48,7 @@
                     dataType: "json",
                     type : 'GET',
                     contentType:"application/x-www-form-urlencoded; charset=UTF-8",
-                    data:"categorie=categorie&datedeb=1994-08-04&datefin=1996-06-05",
+                    data:"type=categorie&datedeb=1994-08-04&datefin=1996-06-05",
                     success: 
                             function (result) {
                                 var data = [];

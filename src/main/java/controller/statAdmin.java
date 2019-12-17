@@ -40,14 +40,14 @@ public class statAdmin extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         DAO dao = new DAO(DataSourceFactory.getDataSource());
-        String categorie = request.getParameter("categorie");
+        String type = request.getParameter("type");
         String dateDeb = request.getParameter("datedeb");
         String dateFin = request.getParameter("datefin");
         Properties resultat = new Properties();
             try {
-                switch (categorie) {
+                switch (type) {
                     case "categorie":
-                        resultat.put("records", dao.priceByCategorie(dateDeb, dateFin));
+                        resultat.put("records", dao.priceByCategorie("1994-08-04", "1996-06-05"));
                         break;
                     case "pays":
                         resultat.put("records", dao.priceByCountry(dateDeb, dateFin));

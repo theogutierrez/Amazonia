@@ -42,7 +42,7 @@
                                 var processedTemplate = Mustache.to_html(template, result);
                                 // On affiche la liste des options dans le select
                                 $('#codes').html(processedTemplate);  
-                                }
+                            }
                 });                                                           
             }
             
